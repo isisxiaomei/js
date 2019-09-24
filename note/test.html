@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Animal(name, age){
+    this.name = name;
+    this.age = age;
+}
+function Person(name, age, gender, say){
+    //通过函数调用的方式，函数内部的指针指向window
+    //Animal(name, age); //不行
+
+    //目的：将Animal内部的this指向Person的实例
+    // Animal.call(this, name, age)表示将Animal内部的this指向Person实例，这里传入的this就指代Person对象，然后属性name, age传入
+    Animal.call(this, name, age)
+    // call的等价代码apply; 注意参数的区别
+    Animal.apply(this, [name, age])
+    this.gender = gender;
+    this.say = say;
+}
+var p1 = new Person("john", 18, "男", function(){});
+console.log(p1);
+
+        // foo();
+        // var a = true;
+        // if (a){
+        //     function foo(){ console.log(1); }
+        // } else {
+        //     function foo(){ console.log(1); }
+        // }
+
+
+
+        //var age = "东方不败";
+        // function Person(){
+        //     this.age = 18;
+        //     this.say = function () {
+        //         console.log("1",this.age);
+        //         var fun = function(){
+        //             var age = 20;
+        //             console.log("2",this.age);
+        //             console.log("3",age);
+        //         }
+        //         fun();
+        //     }
+        // };
+        // var oo = new Person();
+        // oo.say();
+
+
+        // var obj = {
+        //     age: "岳不群",
+        //     sayName: function () {
+        //         var son = function () {
+        //             var age = "令狐冲";
+        //             console.log(this.age); //东方不败
+        //         }
+        //         son();
+        //     }
+        // }
+        // obj.sayName();
+    </script>
+</body>
+</html>
