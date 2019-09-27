@@ -9,7 +9,15 @@
 <body>
     <script>
 
-
+var age = 20;
+var p = {
+    age: 15,
+    say: function(){
+        console.log(this.age);
+    }
+};
+var fun = p.say;
+fun();      // 20——>函数调用
 
 
 
