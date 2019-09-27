@@ -8,31 +8,83 @@
 </head>
 <body>
     <script>
-        function Animal(name, age){
-    this.name = name;
-    this.age = age;
-}
-function Person(name, age, gender, say){
-    //通过函数调用的方式，函数内部的指针指向window
-    //Animal(name, age); //不行
 
-    //目的：将Animal内部的this指向Person的实例
-    // Animal.call(this, name, age)表示将Animal内部的this指向Person实例，这里传入的this就指代Person对象，然后属性name, age传入
-    Animal.call(this, name, age)
-    // call的等价代码apply; 注意参数的区别
-    Animal.apply(this, [name, age])
-    this.gender = gender;
-    this.say = say;
-}
-var p1 = new Person("john", 18, "男", function(){});
-console.log(p1);
 
+
+
+
+        // function show(){
+        //     for(var i = 0; i<5; ++i){
+        //         alert(i);
+        //     }
+        //     var i;
+        //     console.log(i);
+        // }
+        // show();
+
+// var h = function(){
+//     var i = 10;
+//     console.log(i);
+// }();
+// console.log(i);
+
+// var aa = 10
+// var rt = function(index){
+//     return function(){
+//         return index;
+//     }
+// }(aa);
+// console.dir(rt);
+
+// function fun(){
+//     var result = new Array();
+//     for (var i = 0; i<10; ++i) {
+//         result[i] = (function(num){
+//             return function(){
+//                 return num;
+//             };
+//         })(i);
+//     }
+//     return result;
+// }
+// console.log(fun());
+// function fun(){
+//     var result = new Array();
+//     for (var i = 0; i<10; ++i) {
+//         result[i] = function(num){
+//             return num;
+//         }(i);
+//     }
+//     return result;
+// }
+
+// console.log(fun());
+
+//         function Animal(name, age){
+//     this.name = name;
+//     this.age = age;
+// }
+// function Person(name, age, gender, say){
+//     //通过函数调用的方式，函数内部的指针指向window
+//     //Animal(name, age); //不行
+
+//     //目的：将Animal内部的this指向Person的实例
+//     // Animal.call(this, name, age)表示将Animal内部的this指向Person实例，这里传入的this就指代Person对象，然后属性name, age传入
+//     Animal.call(this, name, age)
+//     // call的等价代码apply; 注意参数的区别
+//     Animal.apply(this, [name, age])
+//     this.gender = gender;
+//     this.say = say;
+// }
+// var p1 = new Person("john", 18, "男", function(){});
+// console.log(p1);
+        // 需要在再思考
         // foo();
         // var a = true;
         // if (a){
         //     function foo(){ console.log(1); }
         // } else {
-        //     function foo(){ console.log(1); }
+        //     function foo(){ console.log(2); }
         // }
 
 
