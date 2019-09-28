@@ -9,15 +9,42 @@
 <body>
     <script>
 
-var age = 20;
-var p = {
-    age: 15,
-    say: function(){
-        console.log(this.age);
-    }
-};
-var fun = p.say;
-fun();      // 20——>函数调用
+// var obj5 = {
+//     age: 18,
+//     run: function(){
+//         console.log(this);
+//         var that = this;
+//         setTimeout(function(){
+//             console.log(this.age)   //undefined 因为是全局
+//             console.log(that.age)   //18
+//         }, 50);
+//     }
+// };
+// obj5.run();
+
+// var v = 1;
+// function f1(){
+//   var v = 2;
+//   function f2(){
+//       console.log(v);  //?
+//   }
+//   f2();
+// }
+// console.log(v);
+
+// f1();
+
+
+
+// var age = 20;
+// var p = {
+//     age: 15,
+//     say: function(){
+//         console.log(this.age);
+//     }
+// };
+// var fun = p.say;
+// fun();      // 20——>函数调用
 
 
 
