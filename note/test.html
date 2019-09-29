@@ -9,6 +9,12 @@
 <body>
     <script>
 
+function fun(...args){
+    console.log(args[1]);
+    // 验证args是否是数组
+    console.log(args instanceof Array);
+}
+fun(1, 2, 3, 4);
 // var obj5 = {
 //     age: 18,
 //     run: function(){
