@@ -1,3 +1,4 @@
+> es浏览器兼容性不好，可以使用babel：https://www.babeljs.cn/
 # 1. 模板字符串
 + ${}替换变量
 + 自带换行
@@ -63,7 +64,7 @@ var b = {a, c};
 // var b = {a:a, c:c}; 左边的a和c表示属性a和c，右边的a和c表示变量a和c；可以简写为var b = {a, c};
 ```
 # 4. 函数扩展
-## rest参数
+## 4.1 rest参数
 + 使用背景：es6
 + rest参数是真数组，arguments是伪数组
 + arguments是函数的局部变量，arguments.length表示传入的实参个数
@@ -85,11 +86,106 @@ function fun(...args){
 }
 fun(1, 2, 3);
 ```
-## 箭头函数
+## 4.2 箭头函数
 + 箭头函数应用场景：就是用来替换匿名函数的；简化匿名函数写法
 + 箭头函数基本用法
 ```js
+// 示例1：无参匿名函数
+div.onclick = function() {
+  
+}
+/ 相当于
+div.onclick = ()=>{
+    
+}
+
+// 示例2：有一个参数(箭头函数的括号可以省略)
+div.onclick = function(name) {
+  console.log(name);
+}
+/ 相当于
+div.onclick = (name)=>{
+    console.log(name);
+}
+div.onclick = name=>{
+    console.log(name);
+}
+
+// 示例3：有多个参数
+div.onclick = function(name, age) {
+  console.log(name);
+}
+/ 相当于
+div.onclick = (name, age)=>{
+    console.log(name);
+}
 ```
-+ 匿名函数和箭头函数的区别：
+### 4.2.1 匿名函数和箭头函数的区别：
++ 函数体内的this对象， 就是定义时所在的对象，而不是使用时所在的对象
++ 不可以当做构造函数，不能使用new命令，否则会抛出错误
++ 不可以使用arguments对象，该对象在函数体内不存在，可以使用rest参数代替
++ 不可以使用yield命令，因此箭头函数不能作为Generator函数
+    - 这种方式不常用；Generator用的不多，现在经常使用的是async替代
+```js
+1. 由于匿名函数有独立作用域，而箭头函数没有独立作用域，所以箭头函数内部this是其外层函数决定的
+```
+```js
+// 示例1：
+var p = {
+    age: 20,
+    run: function(){
+        setTimeout(function(){
+            // this指向window
+            console.log(this);
+        
+        },1000)},
+        
+    tave:()=>{
+        setTimeout(()=>{
+            //this指向window
+            //由于箭头函数不具有独立作用域，所以需要向上查找，发现还是一个箭头函数，箭头函数再上面没有其他函数作用域，所以是window作用域
+            console.log(this); 
+        },1000)
+    },
+    
+   travel:function(){
+        //这里匿名函数的this指向p对象
+        setTimeout(()=>{
+            //this指向p对象
+            //由于箭头函数不具有独立作用域，所以需要向上查找，发现还是一个匿名函数，匿名函数指向p对象
+            console.log(this); 
+        },1000)
+   },
+   
+   //es6对象函数的简写：推荐使用的方式
+   say(){
+        console.log("say方法的this：",this);//指向p
+        setTimeout(()=>{
+            console.log(this);            //向上查找发现say函数的this指向p，所以箭头函数的this也指向p              
+        },1000)
+    },
+    
+};
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## global和window的区别
++ global是es中全局作用域的根对象
+    - 但是node中，global是全局变量的载体，没有window
+    - 浏览器端的js中，全局对象是window，浏览器中不存在global
+    - window这个对象不仅存在全局变量，还存在BOM对象
+
 
 
