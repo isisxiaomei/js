@@ -7,14 +7,28 @@
     <title>Document</title>
 </head>
 <body>
-    <script>
 
-function fun(...args){
-    console.log(args[1]);
-    // 验证args是否是数组
-    console.log(args instanceof Array);
-}
-fun(1, 2, 3, 4);
+        <div id="d1">
+                <p id="p1">This is a paragraph.</p>
+                <p id="p2">This is another paragraph.</p>
+                </div>
+                <script>
+                    var pnode = document.createElement("p");
+    var tnode = document.createTextNode("新内容");
+    pnode.id = "p3";
+    pnode.appendChild(tnode);
+    var divNode = document.getElementById("d1");
+    divNode.appendChild(pnode);
+    var ps = divNode.getElementsByTagName("p");
+    for (var i=0; i<ps.length; ++i){
+        console.log(ps[i]);
+    }
+// function fun(...args){
+//     console.log(args[1]);
+//     // 验证args是否是数组
+//     console.log(args instanceof Array);
+// }
+// fun(1, 2, 3, 4);
 // var obj5 = {
 //     age: 18,
 //     run: function(){
