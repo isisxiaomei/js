@@ -8,21 +8,46 @@
 </head>
 <body>
 
-        <div id="d1">
-                <p id="p1">This is a paragraph.</p>
-                <p id="p2">This is another paragraph.</p>
-                </div>
-                <script>
-                    var pnode = document.createElement("p");
-    var tnode = document.createTextNode("新内容");
-    pnode.id = "p3";
-    pnode.appendChild(tnode);
-    var divNode = document.getElementById("d1");
-    divNode.appendChild(pnode);
-    var ps = divNode.getElementsByTagName("p");
-    for (var i=0; i<ps.length; ++i){
-        console.log(ps[i]);
-    }
+        <p id="p1">p1 text</p>
+        <div id="div1">
+            <p id="p2">p2 text</p>
+            <p id="p3">p3 text</p>
+        </div>
+        <script>
+            var divs = document.getElementById("div1");
+            var txt=document.getElementById("p2").childNodes[0].nodeValue;
+        document.write(txt);
+            console.dir(divs);
+            console.log(divs.childNodes[1].innerHTML);
+            console.dir(divs.lastChild);
+            console.dir(divs.parentNode);
+
+
+        // <!-- <p>Hello World!</p>
+        // <div>
+        // <p>The DOM is very useful!</p>
+        // <p>This example demonstrates the <b>document.body</b> property.</p>
+        // </div>
+        
+        // <script>
+        // console.log(document.documentElement.innerHTML);
+        // console.dir(document.body);
+        // console.dir(document); -->
+        
+
+
+        // <!-- <p id="intro">Hello World!</p>
+
+
+        // x=document.getElementById("intro");
+        // console.dir(x.firstChild);
+        // console.log(x.innerHTML);
+        // document.write(x.firstChild.nodeValue); -->
+
+
+
+
+
 // function fun(...args){
 //     console.log(args[1]);
 //     // 验证args是否是数组

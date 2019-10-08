@@ -52,7 +52,7 @@
 </body>
 ```
 ## 2.2 根据id获取
-+ getElementById只能通过document调用
++ getElementById只能通过document调用，返回一个对象
 + 对象的类型保存在属性`__proto__:HTMLDivElement`
 ```js
 // 示例1：main的类型是HTMLDivElement
@@ -161,6 +161,7 @@
 + 可以修改事件
 ```js
 // 示例1：
+// 修改内容和样式
 <body>
     <p id="p1">Hello World!</p>
     <script>
@@ -173,7 +174,7 @@
 </body>
 ```
 ```js
-// 示例2:
+// 示例2: 新增新元素节点
 // 解析：给div新增子节点p元素，并设置新p元素的id属性值为p3，内容节点的内容为“新内容”
 <div id="d1">
 <p id="p1">This is a paragraph.</p>
@@ -192,5 +193,211 @@
     }
 </script>
 ```
+```js
+// 示例3：改变body的背景颜色
+<body>
+
+    <input type="button" onclick="document.body.style.backgroundColor='blue';"
+    value="Change background color" />
+
+</body>
+
+// 示例4：等同于示例3，只进行了函数封装
+<body>
+
+    <script>
+    function ChangeBackground()
+    {
+    document.body.style.backgroundColor="blue";
+    }
+    </script>
+
+    <input type="button" onclick="ChangeBackground()"
+    value="Change background color" />
+
+</body>
+```
+# 4. dom操作元素
++ createElement()：创建新元素
++ appendChild()：为父节点添加已存在的子节点
++ insertBefore()：appendChild方法会在父节点的末尾添加节点，而insertBefore方法可以在指定节点前添加已存在节点
++ removeChild()：删除子节点（删除的前提必须知道待删除节点的父节点）
++ replaceChild()：替换子节点
+```js
+<div id="div1">
+<p id="p1">This is a paragraph.</p>
+<p id="p2">This is another paragraph.</p>
+</div>
+
+// 示例1：
+// 步骤：先创建新元素节点、再添加到父节点
+
+<script>
+    var p3 = document.createElement("p");
+    var text3 = document.createTextNode("这是p3的内容");
+    p3.id = "p3";
+    p3.appendChild(text3);
+
+    var divs = document.getElementById("div1);
+    divs.appendChild(p3);
+</script>
+
+// 示例2：
+// parent.insertBefore(para,child)，将para元素插入到child元素之前
+<script>
+    var para=document.createElement("p");
+    var node=document.createTextNode("This is new.");
+    para.appendChild(node);
+
+    var element=document.getElementById("div1");
+    var child=document.getElementById("p2");
+    element.insertBefore(para,child);
+</script>
+
+// 示例3：
+// removeChild：必须知道父节点
+<script>
+    var element=document.getElementById("div1");
+    var child=document.getElementById("p2");
+    element.removeChild(child);
+</script>
+
+// 示例4：
+// parent.replaceChild(para,child);  使用para替换child元素
+<script>
+var parent=document.getElementById("div1");
+var child=document.getElementById("p1");
+var para=document.createElement("input");
+para.value  = "new";
+parent.replaceChild(para,child);
+</script>
+```
+# 5. DOM操作属性
+## 5.1 dom操作非标单元素属性
++ 通过dom获取到的标签都是对象；标签的属性则是对象的属性；可以使用对象.属性的方式访问
++ 注意class属性不能通过对象.class的形式访问（因为class是类关键字），以***对象.className***访问
+```js
+//示例1：点击按钮div显示隐藏(隐藏样式通过display)
+    <style>
+        #box {
+            background-color: red;
+            width: 200px;
+            height: 200px;
+        }
+        .show {
+            display: block;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+<body>
+    <input type="button" id="btn" value="显示" >
+    <div id="box"></div>
+    <script>
+        var btn = document.getElementById('btn');
+        var box = document.getElementById('box');
+
+        btn.onclick = function () {
+            btn.value = "隐藏";
+            //注意这句box.className 不能采用box.class；因为class关键字
+            box.className = "hidden";
+        }
+    </script>
+</body>
+```
+
+## 5.2 dom操作表单元素属性
++ 当html元素的属性只有一个值的时候，在dom中这个属性的值就会只有true或者false：`disable、checked`
+## 5.3 dom操作元素自定义属性
++ 自定义属性不能直接通过对象.属性名的方式操作;需要对象调用getAttribute方法和setAttribute方法
++ getAttribute和setAttribute：自定义属性和非自定义属性都可以用
+```html
+<!-- 示例1： -->
+<body>
+    <!--//这里的age属性和personId是自定义属性-->
+    <div id="divObj" age="18" personId="1">张三</div>
+
+    <script>
+        var divObj = document.getElementById('divObj');
+        console.log(divObj.id);
+        //自定义属性不能直接对象.属性的形式访问
+        // console.log(divObj.age);
+        // console.log(divObj.personId);
+
+        //自定义属性获取：
+        console.log(divObj.getAttribute('age'));
+        console.log(divObj.getAttribute('personId'));
+
+        //属性设置（自定义属性和非自定义属性都可以用）
+        divObj.setAttribute("age", "19");
+        divObj.setAttribute("class", "divname");
+
+        //属性移除（自定义属性和非自定义属性都可以用）
+        divObj.removeAttribute("age");
+    </script>
+</body>
+```
+
+# 6. 事件
++ `onclick=JavaScript`
+```js
+// 示例1：
+<h1 onclick="this.innerHTML='Ooops!'">Click on this text!</h1>
+
+// 示例2：
+<head>
+    <script>
+        function changetext(id){
+            id.innerHTML="Ooops!";
+        }
+    </script>
+</head>
+<body>
+    <h1 onclick="changetext(this)">Click on this text!</h1>
+    <h1 onclick="changetext(document.getElementsByTagName('h1')[0])">点击文本!</h1>
+</body>
 
 
+// 示例3：
+<button id="myBtn">Try it</button>
+<p id="demo"></p>
+<script>
+    document.getElementById("myBtn").onclick=function(){displayDate()};
+
+    function displayDate()
+    {
+        document.getElementById("demo").innerHTML=Date();
+    }
+</script>
+```
+
+# 7. 导航
++ 导航节点关系：parentNode、firstChild 以及 lastChild
++ 文本节点在前，元素节点在后
++ 除了 innerHTML 属性，您还可以使用 childNodes 和 nodeValue 属性来获取元素的内容
++ nodeValue和innerHTML的区别：innerHTML表示元素的文本，nodeValue表示文本节点的值;因为文本节点没有innerHTML属性
++ document.documentElement - 全部文档
++ document.body - 文档的主体
+```html
+<html>
+ <body>
+    <p id="p1">p1 text</p>
+    <div id="div1">
+        <p id="p2">p2 text</p>
+        <p id="p3">p3 text</p>
+    </div>
+    <script>
+        var x=document.getElementById("p1");
+        document.write(x.firstChild.nodeValue); //p1 text
+        var txt=document.getElementById("p2").childNodes[0].nodeValue;
+        document.write(txt);
+
+        var divs = document.getElementById("div1");
+        console.log(divs.childNodes[1].innerHTML);  //p2 text
+        console.log(divs.lastChild);
+        console.log(divs.parentNode);
+    </script>
+ </body>
+ </html>
+```
