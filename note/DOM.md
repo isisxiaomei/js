@@ -372,7 +372,156 @@ parent.replaceChild(para,child);
 </script>
 ```
 
-# 7. 导航
+# 7. 节点操作
+## 7.1 节点属性
++ nodeType 节点类型
+    - 1：元素节点
+    - 2：属性节点
+    - 3：文本节点
+    - 8：注释节点
+    - 9：文档节点
++ nodeName：节点名称（标签名称）
+  - 元素节点的 nodeName 与标签名相同
+  - 属性节点的 nodeName 与属性名相同
+  - 文本节点的 nodeName 始终是 #text
+  - 文档节点的 nodeName 始终是 #document
++ nodeValue：节点值
+    - 元素节点的 nodeValue 是 undefined 或 null
+    - 文本节点的 nodeValue 是文本本身
+    - 属性节点的 nodeValue 是属性值
+## 7.2 相关结构方法
+> 以下方法属性在使用时都需要注意浏览器兼容性问题
++ parentNode：p2的父节点是div
++ childNodes：
+    - ****节点集合是个可即时更新的结合****
+    - childNodes获取节点的所有孩子节点集合，并不是数组
+    - box的孩子节点个数是7；分别是p1和box间换行的文本节点，p1节点，p1和p2间换行文本、p2，p2和注释间的换行、注释、注释和box间的换行
++ children：
+    - 返回节点的子元素集合；
+    - 只读属性
++ firstChild：返回第一个子节点
++ firstElementChild：返回第一个子元素节点
++ lastChild：返回最后一个子节点
++ lastElementChild：返回最后一个子元素节点
++ nextSibling：返回下一个兄弟节点；找不到返回null
++ nextElementSibling：返回下一个兄弟元素节点；找不到返回null
++ previousSibling：返回上一个兄弟节点
++ previousElementSibling：返回上一个兄弟元素节点
++ hasChildNodes()：判断节点是否有子节点
++ 
+```js
+// 示例1：
+<div id="box">
+    <p id="p1">我是p1</p>
+    <p id="p2">我是p2</p>
+    <!-- 这里是注释 -->
+</div>
+
+// 示例2：获取元素节点
+var nodes = document.getElementById('box').childNodes;
+if (nodes.hasChildNodes()){
+    for(var i=0; i<nodes.length; ++i){
+        var node = nodes[i];
+        //通过节点类型获取元素节点
+        if (node.nodeType === 1){
+            console.log(node);
+        }
+    }
+}
+
+// 示例3：通过children获取子元素集合
+var nodes = document.getElementById('box').children;
+if (nodes.hasChildNodes()){
+    for(var i=0; i<nodes.length; ++i){
+        var node = nodes[i];
+            console.log(node);
+    }
+}
+```
+# 8. 动态创建
++ 应用：比如搜索栏，鼠标放上去的购物车显示
+## 8.1 document.write()
++ 当点击按钮时，document.write()会把当前页面上的内容覆盖掉
++ 比较适合做客服功能
+```js
+// 示例1：点击按钮时页面内容会被覆盖
+<input id="btn" type="button" value="click"/>
+<p>我是第一个页面的内容</p>
+<script>
+        var btn = document.getElementById("btn");
+        btn.onclick = function(){
+            document.write("hello<p>world</p>");
+        };
+</script>
+```
+## 8.2 element.innerHTML
++ element.innerHTML的每次修改都会修改内存中的dom树结构；所以尽量少的操作innerHTML，可以修改为操作数组转字符串再一次性赋值给innerHTML
+```js
+// 示例1：点击展示列表;
+// 缺点：每次操作innerHTML内存中的dom结构会调整，效率低
+<input id="btn" type="button" value="click"/>
+<div id="box">
+</div>
+
+<script>
+    var datas = ["王昭君", "西施", "令狐冲", "岳不群"];
+    var btn = document.getElementById("btn");
+    var box = document.getElementById("box");
+    btn.onclick = function(){
+        box.innerHTML = '<ul>';
+        for(var i=0; i<datas.length; ++i){
+            box.innerHTML += '<li>' + datas[i] + '</li>'
+        }
+        box.innerHTML += '</ul>';
+    };
+</script>
+// 示例2：示例1优化版
+// 进行字符串连接，由于字符串是不变的，所以叠加都是新开辟空间，造成空间浪费
+<script>
+    var datas = ["王昭君", "西施", "令狐冲", "岳不群"];
+    var btn = document.getElementById("btn");
+    var box = document.getElementById("box");
+    var html = '';
+    btn.onclick = function(){
+        html = '<ul>';
+        for(var i=0; i<datas.length; ++i){
+            html += '<li>' + datas[i] + '</li>'
+        }
+        html += '</ul>';
+        box.innerHTML = html;
+    };
+</script>
+// 示例3： 示例2优化版；采用数组
+<script>
+    var datas = ["王昭君", "西施", "令狐冲", "岳不群"];
+    var btn = document.getElementById("btn");
+    var box = document.getElementById("box");
+    var htmls = [];
+    btn.onclick = function(){
+        htmls.push('<ul>');
+        for(var i=0; i<datas.length; ++i){
+            htmls.push('<li>' + datas[i] + '</li>');
+        }
+        htmls.push('</ul>');
+        box.innerHTML = htmls.join('');
+    };
+</script>
+```
+
+## 8.3 document.createElement()
+```js
+<div id="box">
+</div>
+<script>
+    var box = document.getElementById('box');
+    var p = document.createElement('p');
+    p.innerText = "hello";
+    box.appendChild(p);     //注意是追加到末尾
+</script>
+```
+
+
+# 9. 导航
 + 导航节点关系：parentNode、firstChild 以及 lastChild
 + 文本节点在前，元素节点在后
 + 除了 innerHTML 属性，您还可以使用 childNodes 和 nodeValue 属性来获取元素的内容
