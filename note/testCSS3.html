@@ -1,20 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <title>Document</title>
     <style type="text/css">
+      #box1 {
+        height: 100px;
+        width: 100px;
+        background: red;
+      }
+      #box2 {
+        height: 200px;
+        width: 200px;
+        background: blue;
+      }
+      #box3 {
+        height: 300px;
+        width: 300px;
+        background-color: pink;
+      }
     </style>
-</head>
-<body>
-        <input id="btn" type="button" value="click"/>
-        <div id="box">
-        
-        </div>
-        <script>
-                var box = document.getElementById('box');
-    var p = document.createElement('p');
-    p.innerText = "hello";
-    box.appendChild(p);     //注意是追加到末尾
-            </script>
-</body>
+  </head>
+  <body>
+    <!-- <div id="box1">
+      <div id="box2">
+        <div id="box3"></div>
+      </div>
+    </div> -->
+    <ul id="list">
+      <li>岳不群</li>
+      <li>东方不败</li>
+      <li>令狐冲</li>
+      <li>鸠摩智</li>
+    </ul>
+
+    <script>
+      var list = document.getElementById("list");
+      list.onclick = function(e) {
+        e.target.style.backgroundColor = "red";
+      };
+
+      // var box1 = document.getElementById("box1");
+      // var box2 = document.getElementById("box2");
+      // var box3 = document.getElementById("box3");
+
+      // var arrays = [box1, box2, box3];
+      // for(var i=0; i<arrays.length; ++i){
+      //   arrays[i].addEventListener('click', function(){
+      //           console.log(this.id);
+      //   }, true);
+      // }
+      // document.body.addEventListener('click', function(){
+      //         console.log('body');
+      // });
+      // document.addEventListener('click', function(){
+      //         console.log('document');
+      // });
+    </script>
+  </body>
 </html>

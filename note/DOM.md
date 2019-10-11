@@ -217,61 +217,7 @@
 
 </body>
 ```
-# 4. dom操作元素
-+ createElement()：创建新元素
-+ appendChild()：为父节点添加已存在的子节点
-+ insertBefore()：appendChild方法会在父节点的末尾添加节点，而insertBefore方法可以在指定节点前添加已存在节点
-+ removeChild()：删除子节点（删除的前提必须知道待删除节点的父节点）
-+ replaceChild()：替换子节点
-```js
-<div id="div1">
-<p id="p1">This is a paragraph.</p>
-<p id="p2">This is another paragraph.</p>
-</div>
 
-// 示例1：
-// 步骤：先创建新元素节点、再添加到父节点
-
-<script>
-    var p3 = document.createElement("p");
-    var text3 = document.createTextNode("这是p3的内容");
-    p3.id = "p3";
-    p3.appendChild(text3);
-
-    var divs = document.getElementById("div1);
-    divs.appendChild(p3);
-</script>
-
-// 示例2：
-// parent.insertBefore(para,child)，将para元素插入到child元素之前
-<script>
-    var para=document.createElement("p");
-    var node=document.createTextNode("This is new.");
-    para.appendChild(node);
-
-    var element=document.getElementById("div1");
-    var child=document.getElementById("p2");
-    element.insertBefore(para,child);
-</script>
-
-// 示例3：
-// removeChild：必须知道父节点
-<script>
-    var element=document.getElementById("div1");
-    var child=document.getElementById("p2");
-    element.removeChild(child);
-</script>
-
-// 示例4：
-// parent.replaceChild(para,child);  使用para替换child元素
-<script>
-var parent=document.getElementById("div1");
-var child=document.getElementById("p1");
-var para=document.createElement("input");
-para.value  = "new";
-parent.replaceChild(para,child);
-</script>
-```
 # 5. DOM操作属性
 ## 5.1 dom操作非标单元素属性
 + 通过dom获取到的标签都是对象；标签的属性则是对象的属性；可以使用对象.属性的方式访问
@@ -339,39 +285,6 @@ parent.replaceChild(para,child);
 </body>
 ```
 
-# 6. 事件
-+ `onclick=JavaScript`
-```js
-// 示例1：
-<h1 onclick="this.innerHTML='Ooops!'">Click on this text!</h1>
-
-// 示例2：
-<head>
-    <script>
-        function changetext(id){
-            id.innerHTML="Ooops!";
-        }
-    </script>
-</head>
-<body>
-    <h1 onclick="changetext(this)">Click on this text!</h1>
-    <h1 onclick="changetext(document.getElementsByTagName('h1')[0])">点击文本!</h1>
-</body>
-
-
-// 示例3：
-<button id="myBtn">Try it</button>
-<p id="demo"></p>
-<script>
-    document.getElementById("myBtn").onclick=function(){displayDate()};
-
-    function displayDate()
-    {
-        document.getElementById("demo").innerHTML=Date();
-    }
-</script>
-```
-
 # 7. 节点操作
 ## 7.1 节点属性
 + nodeType 节点类型
@@ -408,7 +321,13 @@ parent.replaceChild(para,child);
 + previousSibling：返回上一个兄弟节点
 + previousElementSibling：返回上一个兄弟元素节点
 + hasChildNodes()：判断节点是否有子节点
-+ 
++ createElement()：创建新元素
++ appendChild()：为父节点添加已存在的子节点(注意会追加在末尾)
++ insertBefore()：appendChild方法会在父节点的末尾添加节点，而insertBefore方法可以在指定节点前添加已存在节点
++ removeChild()：删除子节点（删除的前提必须知道待删除节点的父节点）
++ replaceChild()：替换子节点
++ document.documentElement - 全部文档
++ document.body - 文档的主体
 ```js
 // 示例1：
 <div id="box">
@@ -438,6 +357,57 @@ if (nodes.hasChildNodes()){
     }
 }
 ```
+
+```js
+<div id="div1">
+<p id="p1">This is a paragraph.</p>
+<p id="p2">This is another paragraph.</p>
+</div>
+
+// 示例1：
+// 步骤：先创建新元素节点、再添加到父节点
+
+<script>
+    var p3 = document.createElement("p");
+    var text3 = document.createTextNode("这是p3的内容");
+    p3.id = "p3";
+    p3.appendChild(text3);
+
+    var divs = document.getElementById("div1);
+    divs.appendChild(p3);
+</script>
+
+// 示例2：
+// parent.insertBefore(para,child)，将para元素插入到child元素之前
+<script>
+    var para=document.createElement("p");
+    var node=document.createTextNode("This is new.");
+    para.appendChild(node);
+
+    var element=document.getElementById("div1");
+    var child=document.getElementById("p2");
+    element.insertBefore(para,child);
+</script>
+
+// 示例3：
+// removeChild：必须知道父节点
+<script>
+    var element=document.getElementById("div1");
+    var child=document.getElementById("p2");
+    element.removeChild(child);
+</script>
+
+// 示例4：
+// parent.replaceChild(para,child);  使用para替换child元素
+<script>
+var parent=document.getElementById("div1");
+var child=document.getElementById("p1");
+var para=document.createElement("input");
+para.value  = "new";
+parent.replaceChild(para,child);
+</script>
+```
+
 # 8. 动态创建
 + 应用：比如搜索栏，鼠标放上去的购物车显示
 ## 8.1 document.write()
@@ -518,35 +488,4 @@ if (nodes.hasChildNodes()){
     p.innerText = "hello";
     box.appendChild(p);     //注意是追加到末尾
 </script>
-```
-
-
-# 9. 导航
-+ 导航节点关系：parentNode、firstChild 以及 lastChild
-+ 文本节点在前，元素节点在后
-+ 除了 innerHTML 属性，您还可以使用 childNodes 和 nodeValue 属性来获取元素的内容
-+ nodeValue和innerHTML的区别：innerHTML表示元素的文本，nodeValue表示文本节点的值;因为文本节点没有innerHTML属性
-+ document.documentElement - 全部文档
-+ document.body - 文档的主体
-```html
-<html>
- <body>
-    <p id="p1">p1 text</p>
-    <div id="div1">
-        <p id="p2">p2 text</p>
-        <p id="p3">p3 text</p>
-    </div>
-    <script>
-        var x=document.getElementById("p1");
-        document.write(x.firstChild.nodeValue); //p1 text
-        var txt=document.getElementById("p2").childNodes[0].nodeValue;
-        document.write(txt);
-
-        var divs = document.getElementById("div1");
-        console.log(divs.childNodes[1].innerHTML);  //p2 text
-        console.log(divs.lastChild);
-        console.log(divs.parentNode);
-    </script>
- </body>
- </html>
 ```
