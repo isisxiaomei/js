@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input id="btn1" type="button" value="确定" />
+    <input id="btn2" type="button" value="取消" />
+
+    <script>
+      var timerId;
+      var btn1 = document.getElementById("btn1");
+      btn1.onclick = function() {
+        // 每间隔3秒  执行一次
+        timerId = setInterval(function() {
+          console.log("爆炸了");
+        }, 3000);
+      };
+      history.back();
+      history.go(-1);
+      history.go(-2);
+      history.forward();
+      history.go(1);
+
+      var btn2 = document.getElementById("btn2");
+      btn2.onclick = function() {
+        // 取消定时器执行
+        clearTimeout(timerId);
+      };
+    </script>
+  </body>
+</html>
