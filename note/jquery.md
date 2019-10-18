@@ -198,7 +198,7 @@ $(document).ready(function(){
 > 具体见示例 4.7
 
 - addClass():
-  - 向被选元素添加一个或多个类
+  - 向被选元素添加一个或多个样式
   - 在 addClass 方法中类样式名字前面没有(.)
 - removeClass():
   - 从被选元素删除一个或多个类
@@ -388,11 +388,51 @@ $(document).ready(function(){
 ## 5.3 动画
 
 - animate()
-  - 用于创建自定义的动画
-  - `$(selector).animate({params},speed,callback);`
-  - 必需的params参数定义形成动画的 CSS 属性
-  - 当使用animate()时，必须使用Camel标记法书写所有的属性名，比如，必须使用 paddingLeft 而不是 padding-left
-  - 必写参数样式可以使用相对值
+  - **定义**：用于创建自定义的动画
+  - **语法**：`$(selector).animate({params},speed,callback);`
+    - 必需的 params 参数定义形成动画的 CSS 属性
+    - 必写参数样式可以使用相对值
+    - 可以使用预定值，把属性的动画值设置为 "show"、"hide" 或 "toggle(show 和 hide 切换)"
+  - **注意点**：当使用 animate()时，必须使用 Camel 标记法书写所有的属性名，比如，必须使用 paddingLeft 而不是 padding-left
+  - **动画队列功能**：编写多个 animate() 调用，jQuery 会创建包含这些方法调用的"内部"队列。然后逐一运行这些 animate 调用
+  - **备注**：默认情况下，所有的 HTML 元素有一个静态的位置，且是不可移动的。 如果需要改变为，我们需要将元素的 position 属性设置为 relative, fixed, 或 absolute!
+- stop()
+  - **定义**：默认的 stop() 会清除在被选元素上指定的当前活动动画（当前元素其他动画还会继续运行）
+  - **注意点**：stop 适用于所有 jQuery 效果函数，包括滑动、淡入淡出和自定义动画
+  - **语法**：`$(selector).stop(stopAll,goToEnd);`
+  - 可选的 stopAll 参数表示：是否清除动画队列。
+    - false（默认）：即仅停止活动的动画，元素上的其他动画继续执行
+    - true：清除动画队列；停止被选元素的所有动画
+  - 可选的 goToEnd 参数表示：是否立即完成当前动画（有时候动画过程很慢，如果设置为 true，则会立即看到动画结束的结果）。默认是 false
+
+```js
+// 示例1：stop()
+$(document).ready(function(){
+  $("#start").click(function(){
+    $("div").animate({left:'100px'},5000);
+    $("div").animate({fontSize:'3em'},5000);
+  });
+
+  $("#stop").click(function(){
+    $("div").stop();
+  });
+
+  $("#stop2").click(function(){
+    $("div").stop(true);
+  });
+
+  $("#stop3").click(function(){
+    $("div").stop(true,true);
+  });
+
+});
+<button id="start">开始</button>
+<button id="stop">停止</button>
+<button id="stop2">停止所有</button>
+<button id="stop3">停止动画，但完成动作</button>
+<div style="background:#98bf21;height:100px;width:200px;position:absolute;">HELLO</div>
+
+```
 
 ```js
 // 示例1：
@@ -410,9 +450,38 @@ $(document).ready(function(){
 </div>
 ```
 
-# 6. 链式编程
+```js
+// 示例1：队列
+<script>
+      $(function (){
+        $('button').click(function (){
+          var div=$("div");
+          // 先把 <div> 元素往右边移动了 100 像素，然后增加文本的字号
+          div.animate({left:'100px'},"slow");
+          div.animate({fontSize:'3em'},"slow");
+        })
+      })
+</script>
+<button>开始动画</button>
+<div style="background:#98bf21;height:100px;width:200px;position:absolute;">HELLO</div>
+```
 
-- 要求返回明白每个函数的返回；只有返回元素对象才可以进行链式编程
+# 6. 链式编程
+- 要求返回明白每个函数的返回；只有返回元素对象才可以进行链式编程（在相同的元素上）
+```js
+// 示例1：
+// 为了可读性可以如下写法：
+$("button").click(function(){
+
+    // 可读性不好
+    $("#p1").css("color","red").slideUp(2000).slideDown(2000);
+
+    // 可读性好：jQuery 会抛掉多余的空格，并当成一行长代码来执行上面的代码行
+    $("#p1").css("color","red")
+      .slideUp(2000)
+      .slideDown(2000);
+});
+```
 
 # 7. 元素节点关系
 

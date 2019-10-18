@@ -7,15 +7,17 @@
     <script src="../jquery-3.4.1/jquery-3.4.1.js"></script>
     <script>
       $(function (){
-        $('button').click(function(){
-          $('div').animate({left:'250px',opacity:'0.3'}, 3000);
+        $('button').click(function (){
+          var div=$("div");  
+          // 把 <div> 元素往右边移动了 100 像素，然后增加文本的字号
+          div.animate({left:'100px'},"slow");
+          div.animate({fontSize:'3em'},"slow");
         })
-      });
+      })
     </script>
   </head>
   <body>
     <button>开始动画</button>
-    <div style="background:red;height:100px;width:100px;position:absolute;">
-    </div>
+    <div style="background:#98bf21;height:100px;width:200px;position:absolute;">HELLO</div>
   </body>
 </html>
