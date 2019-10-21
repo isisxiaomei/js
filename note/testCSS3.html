@@ -3,33 +3,23 @@
   <head>
     <title>Document</title>
     <style type="text/css">
-      #box1 {
-        height: 300px;
-        width: 300px;
-        background-color: red;
-      }
-      #box2 {
-        height: 200px;
-        width: 200px;
-        background-color: blue;
-      }
-      #box3 {
-        height: 100px;
-        width: 100px;
-        background-color: pink;
+      h1 + p {
+        font-weight: bold;
+        background-color: #333;
+        color: #fff;
+        padding: 0.5em;
       }
     </style>
   </head>
   <body>
-    <input id="txt" type="text">
-    <script>
-      var txt = document.getElementById('txt');
-      txt.onkeydown = e => {
-              e = e || window.event;
-              if ( (e.keyCode < 48 || e.keyCode > 57) && e.keyCode != 8){
-                e.preventDefault();
-              }
-      };
-    </script>
+      <article>
+          <p>I am a paragraph.</p>
+          <h1>A heading</h1>
+          <p>I am a paragraph.</p>
+          <p>I am another paragraph.</p>
+          <div>I am a div</div>
+          <p>I am another paragraph.</p>
+      </article>
+          
   </body>
 </html>
