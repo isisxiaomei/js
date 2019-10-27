@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+
+        function f1(){
+            return new Promise(resolve => {
+                setTimeout(res => {
+                    console.log("第一步");
+                    resolve("第一步完成");
+                } ,1000);
+            });
+        }
+        f1().then(res=>{
+        
+        });
+        // new Promise((resolve, reject) => {
+        //     setTimeout(res => {
+        //         console.log(res);   //undefine
+        //         resolve(1);
+        //     } ,1000);
+        // }).then(res => {
+        //     console.log(res);
+        //     return 100;
+        // }).then(res => {
+        //     console.log(res);
+        // }).catch(resError => {
+        //     console.log(resError);
+        // });
+
+        // new Promise( (resolve, reject) => {
+        //     setTimeout(res=>{
+        //         console.log("第一步");
+        //         resolve(res);
+        //     } ,2000);
+        // }).then(res=>{
+        //     console.log(res);       // undefine
+        //     return new Promise( (resolve, reject) => {
+        //         setTimeout(res=>{
+        //             console.log("第二步");
+        //             reject("第二步失败");
+        //         } ,2000);
+        //     });
+        // }).then(res => {
+        //     // 不会执行到这里
+        //     console.log("第二步成功");
+        // }).catch( resError => {
+        //     console.log(resError);
+        // });
+    //   function getBooks() {
+    //     // 执行resolve()表示异步操作是成功的
+    //     // 执行reject()表示异步操作是失败的
+    //     return new Promise((resolve, reject) => {
+    //       $.ajax({
+    //         url: "/getBooks",
+    //         success(res) {
+    //           resolve(res);
+    //         },
+    //         error(resError) {
+    //           reject(resError);
+    //         }
+    //       });
+    //     });
+    //   }
+    //   // then接受两个参数，一个是上一步成功的回调，另一个是上一步操作失败的回调
+    //   getBooks().then(
+    //     res => {
+    //       //res表示上一步操作成功时传递出来的数据
+    //     },
+    //     resError => {
+    //       // resError表示上一步操作失败时传递出来的数据
+    //     }
+    //   );
+
+    //   function getUser() {
+    //     return new Promise(resolve => {
+    //       $.get("/getUser", res => {
+    //         // res是服务器传来的数据
+    //         // 告诉外界本次异步操作执行完毕，并将数据res带给外界
+    //         resolve(res);
+    //       });
+    //     });
+    //   }
+    //   getUser().then(res => {
+    //     // then的参数res表示上一个异步操作传出来的参数数据；这里是resolve(res)中的res数据
+    //   });
+
+    //   function f1() {
+    //     return new Promise(resolve => {
+    //       console.log("第一步");
+    //       resolve();
+    //     });
+    //   }
+
+    //   function f2() {
+    //     return new Promise(resolve => {
+    //       console.log("第二步");
+    //       resolve();
+    //     });
+    //   }
+
+    //   f1()
+    //     .then(res => {
+    //       return f2();
+    //     })
+    //     .then(res => {
+    //       return f1();
+    //     })
+    //     .then(res => {
+    //       return f2();
+    //     })
+    //     .then(res => {
+    //       console.log("完成");
+    //     });
+    </script>
+  </body>
+</html>
