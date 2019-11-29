@@ -1,202 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
+    <div id="box">
+      hello
+    </div>
+    <script>
+      var box = document.getElementById("box");
+      box.onclick = function() {
+        console.log(4);
+      };
+      setTimeout(function() {
+        console.log(2);
+      }, 3000);
+      console.log(1);
+      console.log(3);
+      //     var divs = document.getElementById("div1");
+      //     var txt=document.getElementById("p2").childNodes[0].nodeValue;
+      // document.write(txt);
+      //     console.dir(divs);
+      //     console.log(divs.childNodes[1].innerHTML);
+      //     console.dir(divs.lastChild);
+      //     console.dir(divs.parentNode);
 
-        <p id="p1">p1 text</p>
-        <div id="div1">
-            <p id="p2">p2 text</p>
-            <p id="p3">p3 text</p>
-        </div>
-        <script>
-            var divs = document.getElementById("div1");
-            var txt=document.getElementById("p2").childNodes[0].nodeValue;
-        document.write(txt);
-            console.dir(divs);
-            console.log(divs.childNodes[1].innerHTML);
-            console.dir(divs.lastChild);
-            console.dir(divs.parentNode);
+      // <!-- <p>Hello World!</p>
+      // <div>
+      // <p>The DOM is very useful!</p>
+      // <p>This example demonstrates the <b>document.body</b> property.</p>
+      // </div>
 
+      // <script>
+      // console.log(document.documentElement.innerHTML);
+      // console.dir(document.body);
+      // console.dir(document); -->
 
-        // <!-- <p>Hello World!</p>
-        // <div>
-        // <p>The DOM is very useful!</p>
-        // <p>This example demonstrates the <b>document.body</b> property.</p>
-        // </div>
-        
-        // <script>
-        // console.log(document.documentElement.innerHTML);
-        // console.dir(document.body);
-        // console.dir(document); -->
-        
+      // <!-- <p id="intro">Hello World!</p>
 
+      // x=document.getElementById("intro");
+      // console.dir(x.firstChild);
+      // console.log(x.innerHTML);
+      // document.write(x.firstChild.nodeValue); -->
 
-        // <!-- <p id="intro">Hello World!</p>
+      // function fun(...args){
+      //     console.log(args[1]);
+      //     // 验证args是否是数组
+      //     console.log(args instanceof Array);
+      // }
+      // fun(1, 2, 3, 4);
+      // var obj5 = {
+      //     age: 18,
+      //     run: function(){
+      //         console.log(this);
+      //         var that = this;
+      //         setTimeout(function(){
+      //             console.log(this.age)   //undefined 因为是全局
+      //             console.log(that.age)   //18
+      //         }, 50);
+      //     }
+      // };
+      // obj5.run();
 
+      // var v = 1;
+      // function f1(){
+      //   var v = 2;
+      //   function f2(){
+      //       console.log(v);  //?
+      //   }
+      //   f2();
+      // }
+      // console.log(v);
 
-        // x=document.getElementById("intro");
-        // console.dir(x.firstChild);
-        // console.log(x.innerHTML);
-        // document.write(x.firstChild.nodeValue); -->
+      // f1();
 
+      // var age = 20;
+      // var p = {
+      //     age: 15,
+      //     say: function(){
+      //         console.log(this.age);
+      //     }
+      // };
+      // var fun = p.say;
+      // fun();      // 20——>函数调用
 
+      // function show(){
+      //     for(var i = 0; i<5; ++i){
+      //         alert(i);
+      //     }
+      //     var i;
+      //     console.log(i);
+      // }
+      // show();
 
+      // var h = function(){
+      //     var i = 10;
+      //     console.log(i);
+      // }();
+      // console.log(i);
 
+      // var aa = 10
+      // var rt = function(index){
+      //     return function(){
+      //         return index;
+      //     }
+      // }(aa);
+      // console.dir(rt);
 
-// function fun(...args){
-//     console.log(args[1]);
-//     // 验证args是否是数组
-//     console.log(args instanceof Array);
-// }
-// fun(1, 2, 3, 4);
-// var obj5 = {
-//     age: 18,
-//     run: function(){
-//         console.log(this);
-//         var that = this;
-//         setTimeout(function(){
-//             console.log(this.age)   //undefined 因为是全局
-//             console.log(that.age)   //18
-//         }, 50);
-//     }
-// };
-// obj5.run();
+      // function fun(){
+      //     var result = new Array();
+      //     for (var i = 0; i<10; ++i) {
+      //         result[i] = (function(num){
+      //             return function(){
+      //                 return num;
+      //             };
+      //         })(i);
+      //     }
+      //     return result;
+      // }
+      // console.log(fun());
+      // function fun(){
+      //     var result = new Array();
+      //     for (var i = 0; i<10; ++i) {
+      //         result[i] = function(num){
+      //             return num;
+      //         }(i);
+      //     }
+      //     return result;
+      // }
 
-// var v = 1;
-// function f1(){
-//   var v = 2;
-//   function f2(){
-//       console.log(v);  //?
-//   }
-//   f2();
-// }
-// console.log(v);
+      // console.log(fun());
 
-// f1();
+      //         function Animal(name, age){
+      //     this.name = name;
+      //     this.age = age;
+      // }
+      // function Person(name, age, gender, say){
+      //     //通过函数调用的方式，函数内部的指针指向window
+      //     //Animal(name, age); //不行
 
+      //     //目的：将Animal内部的this指向Person的实例
+      //     // Animal.call(this, name, age)表示将Animal内部的this指向Person实例，这里传入的this就指代Person对象，然后属性name, age传入
+      //     Animal.call(this, name, age)
+      //     // call的等价代码apply; 注意参数的区别
+      //     Animal.apply(this, [name, age])
+      //     this.gender = gender;
+      //     this.say = say;
+      // }
+      // var p1 = new Person("john", 18, "男", function(){});
+      // console.log(p1);
+      // 需要在再思考
+      // foo();
+      // var a = true;
+      // if (a){
+      //     function foo(){ console.log(1); }
+      // } else {
+      //     function foo(){ console.log(2); }
+      // }
 
+      //var age = "东方不败";
+      // function Person(){
+      //     this.age = 18;
+      //     this.say = function () {
+      //         console.log("1",this.age);
+      //         var fun = function(){
+      //             var age = 20;
+      //             console.log("2",this.age);
+      //             console.log("3",age);
+      //         }
+      //         fun();
+      //     }
+      // };
+      // var oo = new Person();
+      // oo.say();
 
-// var age = 20;
-// var p = {
-//     age: 15,
-//     say: function(){
-//         console.log(this.age);
-//     }
-// };
-// var fun = p.say;
-// fun();      // 20——>函数调用
-
-
-
-        // function show(){
-        //     for(var i = 0; i<5; ++i){
-        //         alert(i);
-        //     }
-        //     var i;
-        //     console.log(i);
-        // }
-        // show();
-
-// var h = function(){
-//     var i = 10;
-//     console.log(i);
-// }();
-// console.log(i);
-
-// var aa = 10
-// var rt = function(index){
-//     return function(){
-//         return index;
-//     }
-// }(aa);
-// console.dir(rt);
-
-// function fun(){
-//     var result = new Array();
-//     for (var i = 0; i<10; ++i) {
-//         result[i] = (function(num){
-//             return function(){
-//                 return num;
-//             };
-//         })(i);
-//     }
-//     return result;
-// }
-// console.log(fun());
-// function fun(){
-//     var result = new Array();
-//     for (var i = 0; i<10; ++i) {
-//         result[i] = function(num){
-//             return num;
-//         }(i);
-//     }
-//     return result;
-// }
-
-// console.log(fun());
-
-//         function Animal(name, age){
-//     this.name = name;
-//     this.age = age;
-// }
-// function Person(name, age, gender, say){
-//     //通过函数调用的方式，函数内部的指针指向window
-//     //Animal(name, age); //不行
-
-//     //目的：将Animal内部的this指向Person的实例
-//     // Animal.call(this, name, age)表示将Animal内部的this指向Person实例，这里传入的this就指代Person对象，然后属性name, age传入
-//     Animal.call(this, name, age)
-//     // call的等价代码apply; 注意参数的区别
-//     Animal.apply(this, [name, age])
-//     this.gender = gender;
-//     this.say = say;
-// }
-// var p1 = new Person("john", 18, "男", function(){});
-// console.log(p1);
-        // 需要在再思考
-        // foo();
-        // var a = true;
-        // if (a){
-        //     function foo(){ console.log(1); }
-        // } else {
-        //     function foo(){ console.log(2); }
-        // }
-
-
-
-        //var age = "东方不败";
-        // function Person(){
-        //     this.age = 18;
-        //     this.say = function () {
-        //         console.log("1",this.age);
-        //         var fun = function(){
-        //             var age = 20;
-        //             console.log("2",this.age);
-        //             console.log("3",age);
-        //         }
-        //         fun();
-        //     }
-        // };
-        // var oo = new Person();
-        // oo.say();
-
-
-        // var obj = {
-        //     age: "岳不群",
-        //     sayName: function () {
-        //         var son = function () {
-        //             var age = "令狐冲";
-        //             console.log(this.age); //东方不败
-        //         }
-        //         son();
-        //     }
-        // }
-        // obj.sayName();
+      // var obj = {
+      //     age: "岳不群",
+      //     sayName: function () {
+      //         var son = function () {
+      //             var age = "令狐冲";
+      //             console.log(this.age); //东方不败
+      //         }
+      //         son();
+      //     }
+      // }
+      // obj.sayName();
     </script>
-</body>
+  </body>
 </html>
