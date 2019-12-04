@@ -120,7 +120,94 @@ console.log(p1);
 ## 2.5 寄生继承
 ## 2.6 寄生组合继承
 
-# 原型链（家族族谱）
-+ **概念**：JS中的对象中可能还有父对象，父对象还有父对象...祖先
-+ **本质**： 原型链本质就是一种继承，对象中都有一个__proto__的属性，指向父对象；以此来实现该对象访问父对象的中的相关属性
-+ **根对象**：Object.prototype
+
+# 3 prototype
++ **prototype本质**：Js规定，每个函数都有一个prototype属性，指向一个对象；对于普通函数来说，该属性基本无用。但是，对于构造函数来说，生成实例的时候，该属性会自动成为实例对象的原型
++ **根对象**： JavaScript 规定，所有对象都有自己的原型对象（prototype）；根对象`Object.prototype` 即Object构造函数的prototype属性; `Object.prototype` 对象的原型是`null`
+```js
+// 示例1：
+Object.getPrototypeOf(Object.prototype) // null
+```
+
+# 4 对象&函数&原型3者关系
++ ***对象和原型***：对象中都有一个`__proto__`的属性，指向父对象；以此来实现该对象访问父对象的中的相关属性; 注意`__proto__`属性只能在控制台查看，但是没有提供代码访问；所以要获取实例对象原型可以通过`Object.getPrototypeOf(实例对象)` 获取。`Object.getPrototypeOf(person1) === Person.prototype`
++ ***函数和原型***：对于构造函数来说，生成实例的时候，`prototype`会自动成为实例对象的原型；构造函数中的`prototype`属性可以通过`Person.prototype`进行访问
++ ***函数也是对象***：函数也是对象，函数对象是Function的实例
+```js
+// 示例1：
+function fun(){}
+console.dir(fun.constructor.name);  //对象.constructor 返回对象的构造函数
+```
++ ***对象***：对象有属性`__proto__`, 指向该对象的构造函数的原型对象。
++ ***函数***：
+    - 函数除了有属性`__proto__`(因为函数也是对象，__proto__属性)
+    - 还有属性`prototype`，`prototype`指向该方法的原型对象(备注：只有当函数成为构造函数创建实例时，prop属性会自动成为实例对象的原型)。
+```js
+// 示例1：函数对象
+function fun(){}
+// 解析：Object.getPrototypeOf(fun) 得到fun对象的构造函数的原型对象（理解每个对象的__proto__）
+// 解析：fun.constructor.prototype  得到fun对象的构造函数的原型对象(理解 对象.constructor===构造函数)
+console.log(Object.getPrototypeOf(fun) === fun.constructor.prototype);  // true
+```
+# 5 constructor
+## 5.1 基本概念
++ **constructor属性**：`prototype`对象有一个`constructor`属性，默认指向prototype对象所在的构造函数。
+```js
+// 示例1：
+function P() {}
+P.prototype.constructor === P // true
+```
++ **constructor继承性**：由于constructor属性定义在prototype对象上面，意味着可以被所有实例对象继承
+```js
+// 示例1：
+function P() {}
+var p = new P();
+
+// p.constructor属性是继承原型的
+p.constructor === P // true
+p.constructor === P.prototype.constructor // true
+```
+## 5.2 constructor作用
++ ***constructor作用1***：可以得知某个实例对象，到底是哪一个构造函数产生的
+```js
+// 示例1：
+function F() {};
+var f = new F();
+
+f.constructor === F // true
+```
++ ***constructor作用2***：可以通过实例对象获取构造函数；再利用构造函数创建实例对象
+```js
+// 示例1：
+function F() {};
+var f = new F();
+var obj = new f.constructor();
+```
+
++ ***constructor作用3***：如果不能确定constructor属性是什么函数，可以通过`name`属性，从实例得到构造函数的名称
+```js
+// 示例1：
+function F() {};
+var f = new F();
+f.constructor.name  // F
+```
+## 5.3 constructor注意点
++ `constructor`: 表示原型对象与构造函数之间的关联关系，如果修改了原型对象，一般会同时修改constructor属性，防止引用的时候出错
+```js
+// 示例1：
+// 坏的写法
+C.prototype = {
+  method1: function (...) { ... },
+  // ...
+};
+
+// 好的写法
+C.prototype = {
+  constructor: C,
+  method1: function (...) { ... },
+  // ...
+};
+
+// 更好的写法
+C.prototype.method1 = function (...) { ... };
+```

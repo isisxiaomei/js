@@ -11,10 +11,21 @@
       hello
     </div>
     <script>
-      var arr = [1,2,3];
-      arr.toLocaleString()
-      arr.toString()
-      console.log(arr.valueOf());
+      function fun(){}
+      console.log(Object.getPrototypeOf(fun) === fun.constructor.prototype);
+      console.dir(fun.constructor.prototype);
+      // console.log(result[0]);
+      // console.log(result[1]);
+      // console.log(result[2]);
+      // var v = 1;
+      // function f1() {
+      //   var v = 2;
+      //   function f2() {
+      //     console.log(this.v); //1
+      //   }
+      //   f2();
+      // }
+      // f1();
       // var box = document.getElementById("box");
       // box.onclick = function() {
       //   console.log(4);
