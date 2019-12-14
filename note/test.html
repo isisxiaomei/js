@@ -1,19 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
-  </head>
-  <body>
-    <div id="box">
-      hello
-    </div>
-    <script>
-      function fun(){}
-      console.log(Object.getPrototypeOf(fun) === fun.constructor.prototype);
-      console.dir(fun.constructor.prototype);
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="box">
+    hello
+  </div>
+  <script>
+
+    var reg = /a/g;
+    var str = 'abc_abc'
+
+    var r1 = reg.exec(str);
+    r1 // ["a"]
+    r1.index // 0
+    reg.lastIndex // 1
+
+    var r2 = reg.exec(str);
+    r2 // ["a"]
+    r2.index // 4
+    reg.lastIndex // 5
+
+    
+
+    var r4 = reg.exec(str);
+    r4 // null
+    reg.lastIndex // 0
+
+      // var P = function (){
+
+      // }
+      // var p = new P();
+      // console.log(p.__proto__ === P.prototype);
+      // console.log(p.__proto__ === p.constructor.prototype);
+
+      // function fun(){}
+      // console.log(Object.getPrototypeOf(fun) === fun.constructor.prototype);
+      // console.dir(fun.constructor.prototype);
       // console.log(result[0]);
       // console.log(result[1]);
       // console.log(result[2]);
@@ -203,6 +232,7 @@
       //     }
       // }
       // obj.sayName();
-    </script>
-  </body>
+  </script>
+</body>
+
 </html>

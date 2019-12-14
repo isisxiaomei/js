@@ -100,7 +100,7 @@ Math.log(Math.E) // 1
 Math.log(10) // 2.302585092994046
 ```
 
-## 3.8 Math.exp() 
+## 3.8 Math.exp()
 + `Math.exp`: 返回常数`e`的参数次方
 
 ## 3.9 Math.random()

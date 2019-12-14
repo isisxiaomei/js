@@ -149,6 +149,14 @@ function fun(){}
 // 解析：fun.constructor.prototype  得到fun对象的构造函数的原型对象(理解 对象.constructor===构造函数)
 console.log(Object.getPrototypeOf(fun) === fun.constructor.prototype);  // true
 ```
++ 获取实例对象的原型对象，有三种方法：
+```js
+// 示例1：
+var P = function (){}
+var p = new P();
+console.log(p.__proto__ === P.prototype);   // true
+console.log(p.__proto__ === p.constructor.prototype);   // true
+```
 # 5 constructor
 ## 5.1 基本概念
 + **constructor属性**：`prototype`对象有一个`constructor`属性，默认指向prototype对象所在的构造函数。

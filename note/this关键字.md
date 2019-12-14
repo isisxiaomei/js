@@ -57,7 +57,7 @@ var obj ={
 obj.foo() // obj
 
 
-// 情况一解析：(obj.foo)();其中obj.foo中保存的是函数地址，所以就变成 ——>  函数名() 
+// 情况一解析：(obj.foo)();其中obj.foo中保存的是函数地址，所以就变成 ——>  函数名()
 (obj.foo = obj.foo)() // window
 // 情况二解析：
 (false || obj.foo)() // window

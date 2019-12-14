@@ -89,21 +89,117 @@ Object.getOwnPropertyNames(a) // ["0", "1", "length"]
 // 示例3：
 Object.keys(obj).length // 2
 ```
-## 4.2 其他方法
-+ `Object.create()`：该方法可以指定原型对象和属性，返回一个新的对象。
-+ `Object.getPrototypeOf()`：获取对象的原型对象。
+## 4.2 Object.create()
++ `Object.create()`：接受一个对象作为参数，然后以参数对象为原型，返回一个新的实例对象
++ **注意点**：使用Object.create方法的时候，必须提供对象原型，即参数不能为空，或者不是对象，否则会报错
++ 如果想要生成一个不继承任何属性（比如没有toString和valueOf方法）的对象，可以将Object.create的参数设为null
+```js
+// 示例1：
+// 原型对象
+var A = {
+  print: function () {
+    console.log('hello');
+  }
+};
+
+// 实例对象
+var B = Object.create(A);
+
+Object.getPrototypeOf(B) === A // true
+B.print() // hello
+B.print === A.print // true
+```
+
+```js
+// 示例1：因为原型对象是null所有不具有 toString和valueOf 方法；因为这些方法都是在Object.prototype中的
+var obj = Object.create(null);
+obj.valueOf()
+// TypeError: Object [object Object] has no method 'valueOf'
+```
+
+```js
+// 示例1:
+Object.create()
+// TypeError: Object prototype may only be an Object or null
+Object.create(123)
+// TypeError: Object prototype may only be an Object or null
+```
+
+## 4.3 Object.getPrototypeOf() 和 Object.setPrototypeOf()
++ `Object.getPrototypeOf()`：接受一个参数对象，返回参数对象的原型
++ `Object.setPrototypeOf()`: 接受两个参数，第一个是现有对象，第二个是原型对象；设置参数对象的原型，并返回该参数对象
+```js
+// 示例1：
+var F = function () {};
+var f = new F();
+Object.getPrototypeOf(f) === F.prototype // true
+```
+```js
+// 示例1：特殊值
+// 空对象的原型是 Object.prototype
+Object.getPrototypeOf({}) === Object.prototype // true
+
+// Object.prototype 的原型是 null
+Object.getPrototypeOf(Object.prototype) === null // true
+
+// 函数的原型是 Function.prototype
+function f() {}
+Object.getPrototypeOf(f) === Function.prototype // true
+
+```
+
+```js
+// 示例1：
+var a = {};
+var b = {x: 1};
+Object.setPrototypeOf(a, b);
+
+Object.getPrototypeOf(a) === b // true
+a.x // 1
+```
+
 # 5 实例方法
 + 除了静态方法，还有不少方法定义在Object.prototype对象。它们称为实例方法，所有Object的实例对象都继承了这些方法
 ## 5.1 Object.prototype.valueOf()
-
-
 ## 5.2 Object.prototype.toString()
-
-
 ## 5.3 Object.prototype.toLocaleString()
 
 ## 5.4 Object.prototype.hasOwnProperty()
-
++ `hasOwnProperty`: 返回一个布尔值，用于判断某个属性定义在对象自身，还是定义在原型链上
++ **作用**：可用于遍历对象属性时只遍历自身属性
+```js
+// 示例1：
+Date.hasOwnProperty('length') // true
+Date.hasOwnProperty('toString') // false
+```
 ## 5.5 Object.prototype.isPrototypeOf()
++ `Object.prototype.isPrototypeOf()`: 用来判断对象是否为参数对象的原型
++ 由于Object.prototype处于原型链的最顶端，所以对各种实例都返回true，只有直接继承自null的对象除外
+```js
+// 示例1：
+var o1 = {};
+var o2 = Object.create(o1);
+o1.isPrototypeOf(o2) // true  o1是o2的原型
+```
+```js
+// 示例1：
+Object.prototype.isPrototypeOf({}) // true
+Object.prototype.isPrototypeOf([]) // true
+Object.prototype.isPrototypeOf(/xyz/) // true
+Object.prototype.isPrototypeOf(Object.create(null)) // false
+```
+## 5.6 Object.prototype.__proto__
++ `__proto__`: 指向当前对象的原型对象，即构造函数的prototype属性。
++ __proto__属性只有浏览器才需要部署，其他环境可以不部署
+```js
+// 示例1：
+ar obj = new Object();
+obj.__proto__ === Object.prototype  // true
+obj.__proto__ === obj.constructor.prototype // true
+```
+## 5.7 Object.prototype.propertyIsEnumerable()
 
-## 5.6 Object.prototype.propertyIsEnumerable()
+# 6 in 运算符和 for...in 循环
++ `in操作符`：返回一个布尔值，表示一个对象是否具有某个属性。不区分该属性是对象自身的属性，还是继承的属性
++ **作用**：`in`运算符常用于检查一个属性是否存在
++ `for...in`: 获得对象的`所有可遍历属性`（不管是自身的还是继承的）
