@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        class Parent {
+            static myMethod(msg) {
+                console.log('static', msg);
+            }
+
+            myMethod(msg) {
+                console.log(this.constructor.name); // Child 
+                console.log('instance', msg);
+            }
+        }
+
+        class Child extends Parent {
+            static myMethod(msg) {
+                // 相当于Parent.myMethod(msg)
+                super.myMethod(msg);
+            }
+
+            
+            myMethod(msg) {
+                super.myMethod(msg);
+                super.xxx = 10;
+                super.fun = this.fun;
+                super.fun();
+                // this.fun();
+            }
+
+            fun(){
+                console.log(this.xxx);
+            }
+
+        }
+
+        // Child.myMethod(1); // static 1
+
+        var child = new Child();
+        child.myMethod(2); // instance 2
+        
+
+
+
+
+
+        // ES5 
+        // function Point(x, y) {
+        //     // ES5 定义对象属性
+        //     this.x = x;
+        //     this.y = y;
+        // }
+
+        // // ES5：定义对象方法(也是在原型的方法)
+        // Point.prototype.toString = function () {
+        //     return '(' + this.x + ', ' + this.y + ')';
+        // };
+
+        // var p = new Point(1, 2);
+        // // ES5 定义对象属性
+        // p.z = "z";
+        // console.log(Point.prototype.constructor === Point);
+        // // ES5 定义静态属性
+        // Point.z = "z";
+        // // ES5 定义静态方法
+        // Point.say = function () {
+        //     console.log("Es5静态方法")
+        // }
+
+        // console.dir(p);
+        // console.dir(Point);
+
+
+        // class Bar {
+        //     // ES6定义 对象属性2【类的最顶端】
+        //     age = 18;
+        //     // ES6定义 静态属性
+        //     static grade = 18;
+        //     constructor() {
+        //         // ES6定义 对象属性1
+        //         this.i = 10;
+        //     }
+        //     // ES6 定义对象原型方法
+        //     doStuff() {
+        //         console.log('stuff');
+        //     }
+
+        //     // ES6 定义静态方法
+        //     static say(){}
+        // }
+        // var b = new Bar();
+        // console.log(b.doStuff ===  Bar.prototype.doStuff); // true
+        // // ES6定义 静态属性
+        // Bar.grade = 18;
+        // // ES6定义 静态方法
+        // Bar.foo = function(){};
+        // console.dir(b);
+
+
+
+
+//         class Foo {
+//   #a;
+//   static #b = 10;
+//   constructor(a) {
+//     this.#a = a;
+//   }
+//   #sum() {
+//     return this.#a+1;
+//   }
+//   static #add(){
+//       return Foo.#b+2;
+//   }
+//   printSum() {
+//     console.log(this.#sum());
+//     console.log(Foo.#add());
+//   }
+// }
+
+// var foo = new Foo(20);
+// foo.printSum();
+        // class Foo {
+        //     #a;
+        //     static #b = 10;
+        //     constructor(a) {
+        //         this.#a = a;
+        //     }
+        //     #sum() {
+        //         return #a + 1;
+        //     }
+        //     static #add() {
+        //         return this.#b + 2
+        //     }
+        //     printSum() {
+        //         console.log(this.#sum());
+        //         console.log(Foo.#add());
+        //     }
+        // }
+
+        // var foo = new Foo(20);
+        // foo.printSum();
+    </script>
+</body>
+
+</html>
