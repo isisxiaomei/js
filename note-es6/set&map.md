@@ -126,6 +126,39 @@ let difference = new Set([...a].filter(x => !b.has(x)));
 // Set {1}
 ```
 # 2 WeakSet
++ WeakSet 结构与 Set 类似，也是不重复的值的集合。
++ WeakSet和Set的两个区别：
+  - WeakSet 的成员只能是对象，而不能是其他类型的值。（WeakSet 可以接受一个数组或类似数组的对象作为参数。（实际上，任何具有 Iterable 接口的对象，都可以作为 WeakSet 的参数。））
+  - WeakSet 中的对象都是弱引用，即垃圾回收机制不考虑 WeakSet 对该对象的引用，也就是说，如果其他对象都不再引用该对象，那么垃圾回收机制会自动回收该对象所占用的内存，不考虑该对象还存在于 WeakSet 之中
+```js
+// 示例1：
+const ws = new WeakSet();
+ws.add(1)
+// TypeError: Invalid value used in weak set
+ws.add(Symbol())
+// TypeError: invalid value used in weak set
+
+
+// 示例2：
+const a = [[1, 2], [3, 4]];
+const ws = new WeakSet(a);
+// WeakSet {[1, 2], [3, 4]}
+```
+
+```js
+// 示例1：
+const a = [[1, 2], [3, 4]];
+const ws = new WeakSet(a);
+// WeakSet {[1, 2], [3, 4]}
+
+// 示例2：
+const b = [3, 4];
+const ws = new WeakSet(b);
+// Uncaught TypeError: Invalid value used in weak set(…)
+```
++ 注意点：WeakSet 没有size属性，WeakSet 不能遍历，是因为成员都是弱引用，随时可能消失
+
+
 
 # 3 Map
 ## 3.1 基本用法
@@ -293,11 +326,43 @@ toMap({yes: true, no: false})
 + map和json互转
 ```js
 // 示例1：map转成json
+function strMapToJson(strMap) {
+  return JSON.stringify(strMapToObj(strMap));
+}
+
+let myMap = new Map().set('yes', true).set('no', false);
+strMapToJson(myMap)
+// '{"yes":true,"no":false}'
 
 
-// 示例2：json转成map
+// 示例2：
+function mapToArrayJson(map) {
+  return JSON.stringify([...map]);
+}
+
+let myMap = new Map().set(true, 7).set({foo: 3}, ['abc']);
+mapToArrayJson(myMap)
+// '[[true,7],[{"foo":3},["abc"]]]'
 ```
 
+```js
+// 示例1：json转成map
+function jsonToStrMap(jsonStr) {
+  return objToStrMap(JSON.parse(jsonStr));
+}
+
+jsonToStrMap('{"yes": true, "no": false}')
+// Map {'yes' => true, 'no' => false}
+
+
+// 示例2：
+function jsonToMap(jsonStr) {
+  return new Map(JSON.parse(jsonStr));
+}
+
+jsonToMap('[[true,7],[{"foo":3},["abc"]]]')
+// Map {true => 7, Object {foo: 3} => ['abc']}
+```
 + map借用数组filter()和map()
 ```js
 // 示例1：
@@ -311,3 +376,34 @@ const map1 = new Map(
 );
 ```
 # 4 WeakMap
++ WeakMap结构与Map结构类似，也是用于生成键值对的集合。
++ WeakMap与Map的区别有两点：
+  - WeakMap只接受对象作为键名（null除外）
+  - WeakMap的键名所指向的对象（注意：WeakMap 弱引用的只是键名，而不是键值。键值依然是正常引用）
++ 以下阮老师的解析可以更好理解弱引用理解WeakMap
+```js
+// 示例1：
+const e1 = document.getElementById('foo');
+const e2 = document.getElementById('bar');
+const arr = [
+  [e1, 'foo 元素'],
+  [e2, 'bar 元素'],
+];
+
+// 上面代码中，e1和e2是两个对象，我们通过arr数组对这两个对象添加一些文字说明。这就形成了arr对e1和e2的引用。
+
+// 一旦不再需要这两个对象，我们就必须手动删除这个引用，否则垃圾回收机制就不会释放e1和e2占用的内存。
+
+// 不需要 e1 和 e2 的时候
+// 必须手动删除引用
+arr [0] = null;
+arr [1] = null;
+
+// 上面这样的写法显然很不方便。一旦忘了写，就会造成内存泄露
+// WeakMap 就是为了解决这个问题而诞生的，它的键名所引用的对象都是弱引用，即垃圾回收机制不将该引用考虑在内。因此，只要所引用的对象的其他引用都被清除，垃圾回收机制就会释放该对象所占用的内存。也就是说，一旦不再需要，WeakMap 里面的键名对象和所对应的键值对会自动消失，不用手动删除引用
+```
+
++ 语法区别：
+  -  一是没有遍历操作（即没有keys()、values()和entries()方法），也没有size属性
+  -  二是无法清空，即不支持clear方法
++ WeakMap只有四个方法可用：`get()、set()、has()、delete()`。
