@@ -199,6 +199,16 @@ obj.__proto__ === obj.constructor.prototype // true
 ## 5.7 Object.prototype.propertyIsEnumerable()
 
 # 6 in 运算符和 for...in 循环
-+ `in操作符`：返回一个布尔值，表示一个对象是否具有某个属性。不区分该属性是对象自身的属性，还是继承的属性
++ `in操作符`：返回一个布尔值，表示一个对象是否具有某个属性。`in`操作符和Object.keys()的区别是Object.keys()只返回对象自身属性，`in`不区分该属性是对象自身的属性，还是继承的属性。
 + **作用**：`in`运算符常用于检查一个属性是否存在
 + `for...in`: 获得对象的`所有可遍历属性`（不管是自身的还是继承的）
++ 备注： 一般情况判断某个属性在不在对象中，尽量使用`in`操作符；
+```js
+// 示例1：避免使用obj.age的方式判断是否包含age属性
+var obj = {
+  age: 0
+}
+if (obj.age){
+  // 此时obj.age == 0，包含age属性，但是if的结果确是false；所以尽量使用in操作符
+}
+```

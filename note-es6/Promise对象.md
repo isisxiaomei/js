@@ -1,3 +1,14 @@
+<!-- TOC -->
+
+- [1 Promise 的含义](#1-promise-%e7%9a%84%e5%90%ab%e4%b9%89)
+- [2 基本使用](#2-%e5%9f%ba%e6%9c%ac%e4%bd%bf%e7%94%a8)
+- [3 Promise.prototype.then()](#3-promiseprototypethen)
+- [4 Promise.prototype.catch()](#4-promiseprototypecatch)
+- [5 Promise.prototype.finally()](#5-promiseprototypefinally)
+- [6 Promise.resolve()](#6-promiseresolve)
+- [7 Promise.reject()](#7-promisereject)
+
+<!-- /TOC -->
 # 1 Promise 的含义
 + 对象异步操作状态：Promise对象代表一个异步操作，有三种状态：`pending（进行中）、fulfilled（已成功）和rejected（已失败）`
 + **背景**: 帮忙解决回调地狱问题

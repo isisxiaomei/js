@@ -1,3 +1,26 @@
+<!-- TOC -->
+
+- [1 概述](#1-%e6%a6%82%e8%bf%b0)
+  - [1 新建正则表达式两种方式](#1-%e6%96%b0%e5%bb%ba%e6%ad%a3%e5%88%99%e8%a1%a8%e8%be%be%e5%bc%8f%e4%b8%a4%e7%a7%8d%e6%96%b9%e5%bc%8f)
+- [2 实例属性](#2-%e5%ae%9e%e4%be%8b%e5%b1%9e%e6%80%a7)
+  - [2.1 修饰符相关](#21-%e4%bf%ae%e9%a5%b0%e7%ac%a6%e7%9b%b8%e5%85%b3)
+  - [2.2 与修饰符无关](#22-%e4%b8%8e%e4%bf%ae%e9%a5%b0%e7%ac%a6%e6%97%a0%e5%85%b3)
+- [3 实例方法](#3-%e5%ae%9e%e4%be%8b%e6%96%b9%e6%b3%95)
+  - [3.1 RegExp.prototype.test()](#31-regexpprototypetest)
+  - [3.2 RegExp.prototype.exec()](#32-regexpprototypeexec)
+- [4 字符串的实例方法](#4-%e5%ad%97%e7%ac%a6%e4%b8%b2%e7%9a%84%e5%ae%9e%e4%be%8b%e6%96%b9%e6%b3%95)
+  - [4.1 String.prototype.match()](#41-stringprototypematch)
+  - [4.2 String.prototype.search()](#42-stringprototypesearch)
+  - [4.3 String.prototype.replace()](#43-stringprototypereplace)
+  - [4.4 String.prototype.split()](#44-stringprototypesplit)
+- [5 匹配规则](#5-%e5%8c%b9%e9%85%8d%e8%a7%84%e5%88%99)
+  - [5.1 基本规则](#51-%e5%9f%ba%e6%9c%ac%e8%a7%84%e5%88%99)
+  - [5.2 贪婪模式和非贪婪模式](#52-%e8%b4%aa%e5%a9%aa%e6%a8%a1%e5%bc%8f%e5%92%8c%e9%9d%9e%e8%b4%aa%e5%a9%aa%e6%a8%a1%e5%bc%8f)
+  - [5.3 修饰符](#53-%e4%bf%ae%e9%a5%b0%e7%ac%a6)
+  - [5.4 重复匹配{}](#54-%e9%87%8d%e5%a4%8d%e5%8c%b9%e9%85%8d)
+  - [5.5 组匹配()](#55-%e7%bb%84%e5%8c%b9%e9%85%8d)
+
+<!-- /TOC -->
 # 1 概述
 ## 1 新建正则表达式两种方式
 + 方式1：一种是使用`字面量`，以斜杠表示开始和结束

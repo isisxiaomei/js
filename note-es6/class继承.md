@@ -1,3 +1,15 @@
+<!-- TOC -->
+
+- [1 简介](#1-%e7%ae%80%e4%bb%8b)
+- [2 Object.getPrototypeOf()](#2-objectgetprototypeof)
+- [3 super 关键字](#3-super-%e5%85%b3%e9%94%ae%e5%ad%97)
+  - [3.1 super用法：](#31-super%e7%94%a8%e6%b3%95)
+    - [3.1.1 super当做函数](#311-super%e5%bd%93%e5%81%9a%e5%87%bd%e6%95%b0)
+    - [3.1.2 super当做对象](#312-super%e5%bd%93%e5%81%9a%e5%af%b9%e8%b1%a1)
+- [4 类的 prototype 属性和__proto__属性](#4-%e7%b1%bb%e7%9a%84-prototype-%e5%b1%9e%e6%80%a7%e5%92%8cproto%e5%b1%9e%e6%80%a7)
+- [5 原生构造函数的继承](#5-%e5%8e%9f%e7%94%9f%e6%9e%84%e9%80%a0%e5%87%bd%e6%95%b0%e7%9a%84%e7%bb%a7%e6%89%bf)
+
+<!-- /TOC -->
 # 1 简介
 + `extends`:
     - 1. Class 可以通过extends关键字实现继承；
