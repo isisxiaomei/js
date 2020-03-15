@@ -1,3 +1,20 @@
+<!-- TOC -->
+
+- [1. 概念](#1-%e6%a6%82%e5%bf%b5)
+- [2. 静态属性](#2-%e9%9d%99%e6%80%81%e5%b1%9e%e6%80%a7)
+- [3. 静态方法](#3-%e9%9d%99%e6%80%81%e6%96%b9%e6%b3%95)
+  - [3.1 Math.abs()](#31-mathabs)
+  - [3.2 Math.max()和Math.min()](#32-mathmax%e5%92%8cmathmin)
+  - [3.3 Math.floor()和Math.ceil()](#33-mathfloor%e5%92%8cmathceil)
+  - [3.4 Math.round()](#34-mathround)
+  - [3.5 Math.pow()](#35-mathpow)
+  - [3.6 Math.sqrt()](#36-mathsqrt)
+  - [3.7 Math.log()](#37-mathlog)
+  - [3.8 Math.exp()](#38-mathexp)
+  - [3.9 Math.random()](#39-mathrandom)
+  - [3.10 三角函数](#310-%e4%b8%89%e8%a7%92%e5%87%bd%e6%95%b0)
+
+<!-- /TOC -->
 # 1. 概念
 + Math对象不是构造函数，不能生成实例，所有的属性和方法都必须在Math对象上调用
 # 2. 静态属性
