@@ -1,3 +1,19 @@
+<!-- TOC -->
+
+- [1 简介](#1-%e7%ae%80%e4%bb%8b)
+  - [1.1 基本概念](#11-%e5%9f%ba%e6%9c%ac%e6%a6%82%e5%bf%b5)
+  - [1.2 yield 表达式](#12-yield-%e8%a1%a8%e8%be%be%e5%bc%8f)
+  - [1.3 与Iterator接口的关系](#13-%e4%b8%8eiterator%e6%8e%a5%e5%8f%a3%e7%9a%84%e5%85%b3%e7%b3%bb)
+- [2 next 方法的参数](#2-next-%e6%96%b9%e6%b3%95%e7%9a%84%e5%8f%82%e6%95%b0)
+- [3 for...of 循环](#3-forof-%e5%be%aa%e7%8e%af)
+  - [3.1 for-of遍历](#31-for-of%e9%81%8d%e5%8e%86)
+  - [3.2 为原生对象提供for-of](#32-%e4%b8%ba%e5%8e%9f%e7%94%9f%e5%af%b9%e8%b1%a1%e6%8f%90%e4%be%9bfor-of)
+- [4 Generator.prototype.throw()](#4-generatorprototypethrow)
+- [5 Generator.prototype.return()](#5-generatorprototypereturn)
+- [6 next()、throw()、return() 的共同点](#6-nextthrowreturn-%e7%9a%84%e5%85%b1%e5%90%8c%e7%82%b9)
+- [7 yield* 表达式](#7-yield-%e8%a1%a8%e8%be%be%e5%bc%8f)
+
+<!-- /TOC -->
 # 1 简介
 ## 1.1 基本概念
 + **Generator 函数**：Generator 函数是一个状态机，封装了多个内部状态

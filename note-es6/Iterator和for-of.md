@@ -1,3 +1,18 @@
+<!-- TOC -->
+
+- [Iterator](#iterator)
+  - [基本概念](#%e5%9f%ba%e6%9c%ac%e6%a6%82%e5%bf%b5)
+  - [注意点](#%e6%b3%a8%e6%84%8f%e7%82%b9)
+  - [应用场景](#%e5%ba%94%e7%94%a8%e5%9c%ba%e6%99%af)
+  - [遍历器对象的 return() & throw()](#%e9%81%8d%e5%8e%86%e5%99%a8%e5%af%b9%e8%b1%a1%e7%9a%84-return--throw)
+- [for-of](#for-of)
+  - [数组遍历](#%e6%95%b0%e7%bb%84%e9%81%8d%e5%8e%86)
+  - [set遍历](#set%e9%81%8d%e5%8e%86)
+  - [map遍历](#map%e9%81%8d%e5%8e%86)
+  - [array&set&map遍历相关](#arraysetmap%e9%81%8d%e5%8e%86%e7%9b%b8%e5%85%b3)
+  - [for-of对象](#for-of%e5%af%b9%e8%b1%a1)
+
+<!-- /TOC -->
 # Iterator
 ## 基本概念
 + 目的：Iterator 接口主要供for...of消费
