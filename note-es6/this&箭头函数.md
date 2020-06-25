@@ -131,7 +131,7 @@ jQuuery();
 + 每个函数都包含两个非继承而来的方法：`call()和apply()`
 + **`call()和apply()`用途**：设置函数体内的this对象值
 + **apply()和call()区别**：在接受参数的方式不同，对于call而言第一个参数都是this，变化的是其余参数传递时需要逐个列举展开
-+ apply和call都是绑定this值并立即执行；bind并没有立即执行函数而是创建一个新函数，将this绑定到新函数的this上
++ apply和call都是绑定this值并`立即执行`；`bind并没有立即执行函数而是创建一个新函数`，将this绑定到新函数的this上
 
 ```js
 function sum(a, b, c){

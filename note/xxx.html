@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // [6, 3, 7,1]
+        function findMid(nums, l, r) {
+            let i = l;
+            let temp = nums[i];
+            let j = r;
+            while ( i < j) {
+                while (temp <= nums[j] && i < j) {
+                    --j;
+                }
+                if (i < j) {
+                    nums[i] = nums[j];
+                }
+                while (temp >= nums[i] && i < j) {
+                   ++i;
+                }
+                if (i < j) {
+                    nums[j] = nums[i]
+                }
+            }
+            if (i == j){
+                nums[i] = temp;
+            }
+            return i;
+        }
+        function quickSort(nums, l, r) {
+            if (l < r) {
+                let position = findMid(nums, l, r);
+                console.log(position);
+                quickSort(nums, l, position - 1);
+                quickSort(nums, position + 1, r);
+            }
+        }
+
+        var arr = [6, 3, 7, 1];
+        quickSort(arr, 0, arr.length - 1);
+
+        console.log(arr);
+    </script>
+</body>
+
+</html>

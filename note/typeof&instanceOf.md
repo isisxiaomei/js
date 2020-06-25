@@ -1,9 +1,20 @@
+
 # 1. typeof
++ 基本数据类型：`数字，字符串，布尔，undefined，null`
 + typeof
-    - 只能判断：如数字、字符串、布尔值、undefined、函数
-    - typeof不能判断null
+    - 只能判断：数字、字符串、布尔值、undefined、函数
+    - typeof不能判断null，`typeof null // "object"`
     - typeof判断引用类型都是object
-+ `Object.prototype.toString.call()`
+```js
+// 示例1：注意typeof判断出来的类型都是小写的
+typeof 111    // "number"
+typeof 'xxx'    // "string"
+typeof true    // "boolean"
+typeof undefined    // "undefined"
+typeof null    // "object"
+typeof function(){}   // "function"
+```
++ `Object.prototype.toString.call(value)`可以清晰的判断出value的数据类型
     - 5 ——> '[object Number]'
     - "abc" ——> '[object String]'
     - true  ——>  '[object Boolean]'
@@ -13,6 +24,7 @@
     - function(){}  ——>  '[object Function]'
     - new Date()  ——>  '[object Date]'
     - /abc/  ——>  '[object RegExp]'
+    - arguments 对象：——> [object Arguments]
 ```js
 // 示例1：
 function fun(...args){

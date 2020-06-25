@@ -30,9 +30,23 @@ console.log(3);
 
 # 2 事件循环机制
 + 执行步骤: 主线程会执行同步任务，碰到异步任务，主线程会提交给异步线程，异步线程处理异步任务，如果异步任务处理就绪，异步线程会将异步任务放入事件队列中；此时当主线程的执行栈中没有栈帧时，主线程就会查看事件队列，将事件队列中的任务添加到栈中执行。
-
-问题1：
-+ 事件队列中很多就绪任务，获取顺序
-+ 是主线程中没有任务任务才去队列中获取吗？
-![](../image/Snipaste_2019-11-29_16-07-35.png)
+```js
+let p = new Promise((resolve, reject)=>{
+    setTimeout(()=>{
+        resolve("宏任务1");
+        console.log("3")
+    }, 1000);
+    setTimeout(()=>{
+        resolve("宏任务2");
+        console.log("4")
+    }, 1000);
+    console.log("2");
+}).then((res)=>{
+    console.log(res)
+}, ()=>{
+    console.log("失败")
+});
+console.log("1");
+```
+promisethen里面的回调才是微任务，promise的构造函数里面的代码也是同步执行的
 

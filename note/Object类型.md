@@ -161,6 +161,39 @@ a.x // 1
 + 除了静态方法，还有不少方法定义在Object.prototype对象。它们称为实例方法，所有Object的实例对象都继承了这些方法
 ## 5.1 Object.prototype.valueOf()
 ## 5.2 Object.prototype.toString()
++ 定义：Object.prototype.toString方法返回对象的类型字符串
+```js
+var obj = {};
+obj.toString() // "[object Object]"
+
+// 示例2：不同数据类型的Object.prototype.toString方法返回值如下：
+
+数值：            返回[object Number]。
+字符串：          返回[object String]。
+布尔值：          返回[object Boolean]。
+undefined：      返回[object Undefined]。
+null：           返回[object Null]。
+数组：            返回[object Array]。
+arguments 对象：  返回[object Arguments]。
+函数：            返回[object Function]。
+Error 对象：      返回[object Error]。
+Date 对象：       返回[object Date]。
+RegExp 对象：     返回[object RegExp]。
+其他对象：         返回[object Object]。
+```
++ 注意点：数组、字符串、函数、Date 对象都分别部署了自定义的toString方法，覆盖了Object.prototype。toString方法；为了解决这个问题，可以使用call指定对象调用的都是Object的toString方法
+```js
+// 示例1：
+[1, 2, 3].toString() // "1,2,3"
+'123'.toString() // "123"
+```
++ 应用：判断数据类型`Object.prototype.toString.call(value)`; 利用这个特性可以实现typeof
+```js
+// 示例1：
+var obj = {};
+Object.prototype.toString.call(obj) // "[object Object]"
+Object.prototype.toString.call(123) // "[object Number]"
+```
 ## 5.3 Object.prototype.toLocaleString()
 
 ## 5.4 Object.prototype.hasOwnProperty()
