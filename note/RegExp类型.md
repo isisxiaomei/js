@@ -1,29 +1,6 @@
-<!-- TOC -->
-
-- [1 概述](#1-%e6%a6%82%e8%bf%b0)
-  - [1 新建正则表达式两种方式](#1-%e6%96%b0%e5%bb%ba%e6%ad%a3%e5%88%99%e8%a1%a8%e8%be%be%e5%bc%8f%e4%b8%a4%e7%a7%8d%e6%96%b9%e5%bc%8f)
-- [2 实例属性](#2-%e5%ae%9e%e4%be%8b%e5%b1%9e%e6%80%a7)
-  - [2.1 修饰符相关](#21-%e4%bf%ae%e9%a5%b0%e7%ac%a6%e7%9b%b8%e5%85%b3)
-  - [2.2 与修饰符无关](#22-%e4%b8%8e%e4%bf%ae%e9%a5%b0%e7%ac%a6%e6%97%a0%e5%85%b3)
-- [3 实例方法](#3-%e5%ae%9e%e4%be%8b%e6%96%b9%e6%b3%95)
-  - [3.1 RegExp.prototype.test()](#31-regexpprototypetest)
-  - [3.2 RegExp.prototype.exec()](#32-regexpprototypeexec)
-- [4 字符串的实例方法](#4-%e5%ad%97%e7%ac%a6%e4%b8%b2%e7%9a%84%e5%ae%9e%e4%be%8b%e6%96%b9%e6%b3%95)
-  - [4.1 String.prototype.match()](#41-stringprototypematch)
-  - [4.2 String.prototype.search()](#42-stringprototypesearch)
-  - [4.3 String.prototype.replace()](#43-stringprototypereplace)
-  - [4.4 String.prototype.split()](#44-stringprototypesplit)
-- [5 匹配规则](#5-%e5%8c%b9%e9%85%8d%e8%a7%84%e5%88%99)
-  - [5.1 基本规则](#51-%e5%9f%ba%e6%9c%ac%e8%a7%84%e5%88%99)
-  - [5.2 贪婪模式和非贪婪模式](#52-%e8%b4%aa%e5%a9%aa%e6%a8%a1%e5%bc%8f%e5%92%8c%e9%9d%9e%e8%b4%aa%e5%a9%aa%e6%a8%a1%e5%bc%8f)
-  - [5.3 修饰符](#53-%e4%bf%ae%e9%a5%b0%e7%ac%a6)
-  - [5.4 重复匹配{}](#54-%e9%87%8d%e5%a4%8d%e5%8c%b9%e9%85%8d)
-  - [5.5 组匹配()](#55-%e7%bb%84%e5%8c%b9%e9%85%8d)
-
-<!-- /TOC -->
 # 1 概述
 ## 1 新建正则表达式两种方式
-+ 方式1：一种是使用`字面量`，以斜杠表示开始和结束
++ 方式1：一种是使用`字面量`，以斜杠表示开始和结束(缺点：无法识别变量)
 + 方式2：一种是使用`RegExp构造函数`
     - RegExp构造函数还可以接受第二个参数，表示修饰符
 + 区别：字面量方式在引擎编译代码时，就会新建正则表达式，构造函数在运行时新建正则表达式，所以前者的效率较高
@@ -37,13 +14,38 @@ var regex = new RegExp('xyz');
 ```
 
 ```js
+// 示例1：
+let hd = "hundunren"
+/u/.test(hd)  //true   测试hd里面是否包含u
+let a = 'u';
+/a/.test(hd)  //false  无法取出a里面的变量，只能把a当做正则
+
+// 示例2：
+
+var regex = new RegExp(a, 'i');
+regex.test(hd)  // true
+
+```
+
+```js
 // 示例2：
 var regex = new RegExp('xyz', 'i');
 // 等价于
 var regex = /xyz/i;
 ```
 # 2 实例属性
-+ 正则对象的实例属性分成两类
+## 2.0 模式
+> 正则的默认匹配模式是区分大小写、匹配到就停止不再向后匹配、对每个输入行的从头开始逐个字符匹配
++ i: 忽略大小写
++ g：全局匹配
++ m：表示多行模式（multiline）；默认 ^和$ 匹配字符串的开始处和结尾处，加上m修饰符以后，^和$还会匹配行首和行尾，即^和$会识别换行符（\n）
+```js
+// 示例1：
+/world$/.test('hello world\n') // false
+/world$/m.test('hello world\n') // true
+/^b/m.test('a\nb') // true
+/a$/m.test('a\nb') // true
+```
 ## 2.1 修饰符相关
 + 备注：以下属性都是只读的
 + RegExp.prototype.ignoreCase：返回一个布尔值，表示是否设置了i修饰符。
@@ -158,11 +160,90 @@ console.log(r3.index);      // 0
 # 4 字符串的实例方法
 + 备注：以下4种字符串方法与正则有关
 ## 4.1 String.prototype.match()
-+ String.prototype.match()：返回一个数组，成员是所有匹配的子字符串。
++ `match`: 用于确定原字符串是否匹配某个子字符串，返回一个数组，成员为匹配的第一个字符串。如果没有找到匹配，则返回null【备注：匹配可用正则】
++ **注意点**：
+    - 如果正则表达式带有g修饰符，则该方法与正则对象的exec方法行为不同，会一次性返回所有匹配成功的结果【exec：带g是返回第一次匹配到的，然后接着调接着匹配】
+    - 设置正则表达式的lastIndex属性，对match方法无效，匹配总是从字符串的第一个字符开始
+    - 返回的数组还有index属性和input属性，分别表示匹配字符串开始的位置和原始字符串
+```js
+// 示例1：
+'cat, bat, sat, fat'.match('at') // ["at"]
+'cat, bat, sat, fat'.match('xt') // null
+
+// 示例2：
+var s = '_x_x';
+var r1 = /x/;
+var r2 = /y/;
+
+s.match(r1) // ["x"]
+s.match(r2) // null
+
+
+// 示例3：
+var s = 'abba';
+var r = /a/g;
+
+s.match(r) // ["a", "a"]
+r.exec(s) // ["a"]
+
+// 示例4：
+var matches = 'cat, bat, sat, fat'.match('at');
+matches.index // 1
+matches.input // "cat, bat, sat, fat"
+```
 ## 4.2 String.prototype.search()
 + String.prototype.search()：按照给定的正则表达式进行搜索，返回一个整数，表示匹配开始的位置。
 ## 4.3 String.prototype.replace()
-+ String.prototype.replace()：按照给定的正则表达式进行替换，返回替换后的字符串。
++ 备注：replace的执行，是匹配到一个就替换一个
++ `replace`定义: 替换匹配到的值；接受两个参数，一个是正则，一个是替换的内容,返回替换后的字符串。
+```js
+// 示例1：
+'aaa'.replace('a', 'b') // "baa"
+'aaa'.replace(/a/, 'b') // "baa"
+'aaa'.replace(/a/g, 'b') // "bbb"
+
+// 示例2：消除空格
+var str = '  #id div.class  ';
+str.replace(/^\s+|\s+$/g, '')   // "#id div.class"
+
+// 示例3：不加替换时，默认使用undefined进行替换
+var str = '  #id div.class  ';
+str.replace(/^\s+|\s+$/)    // "undefined#id div.class  "
+```
+
++ replace方法的第二个参数可以使用美元符号$，用来指代所替换的内容
+```js
+$&：匹配的子字符串。
+$`：匹配结果前面的文本。
+$'：匹配结果后面的文本。
+$n：匹配成功的第n组内容，n是从1开始的自然数。
+$$：指代美元符号$。
+```
+```js
+// 示例1：
+'hello world'.replace(/(\w+)\s(\w+)/, '$2 $1')  // "world hello"
+'abc'.replace('b', '[$`-$&-$\']')   // "a[a-b-c]c"
+```
++ replace方法的第二个参数可以是替换函数，替换函数可以接受多个参数
+    - 替换函数的第一个参数是捕捉到的内容，第二个参数是捕捉到的组匹配
+```js
+// 示例1：
+'3 and 5'.replace(/[0-9]+/g, function (match) {
+  return 2 * match;
+})      // "6 and 10"
+
+// 示例2：
+var template = '<span id="p1"></span>'
+  + '<span id="p2"></span>'
+  + '<span id="p3"></span>';
+
+template.replace(
+  /(<span id=")(.*?)(">)(<\/span>)/g,
+  function(match, $1, $2, $3, $4){
+    return $1 + $2 + $3 + prices[$2] + $4;
+  }
+);
+```
 ## 4.4 String.prototype.split()
 + String.prototype.split()：按照给定规则进行字符串分割，返回一个数组，包含分割后的各个成员。
 
@@ -178,7 +259,7 @@ console.log(r3.index);      // 0
 (new RegExp('1\\+1')).test('1+1')   // true
 ```
 + 关于 | 和 () 理解
-    - `| `:表示 `或`匹配左边或者右边，但会将表达式划分为左和右；所以需要和`()`搭配
+    - `| `:表示 `或`匹配左边或者右边，但会将整个表达式划分为两部分左和右，匹配到左边就不会再匹配右边了；所以需要和`()`搭配
 
 ![](../image/Snipaste_2019-12-13_17-11-38.png)
 
@@ -223,16 +304,7 @@ s.match(/a+?/) // ["a"]
 ```
 
 ## 5.3 修饰符
-+ i: 忽略大小写
-+ g：全局匹配
-+ m：表示多行模式（multiline）；默认 ^和$ 匹配字符串的开始处和结尾处，加上m修饰符以后，^和$还会匹配行首和行尾，即^和$会识别换行符（\n）
-```js
-// 示例1：
-/world$/.test('hello world\n') // false
-/world$/m.test('hello world\n') // true
-/^b/m.test('a\nb') // true
-/a$/m.test('a\nb') // true
-```
+
 
 ## 5.4 重复匹配{}
 + {n}: 表示恰好重复n次

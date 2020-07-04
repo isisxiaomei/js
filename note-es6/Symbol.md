@@ -1,5 +1,5 @@
 # 1 概述
-+ 背景：ES5 的对象属性名都是字符串，这容易造成属性名的冲突；ES6 引入了一种新的原始数据类型Symbol，表示独一无二的值
++ 背景：ES5 的对象属性名都是字符串，这容易造成属性名的冲突；ES6 引入了一种新的原始数据类型Symbol，表示独一无二的值；可以当做永远不会重复的字符串
 + 参数：
     - `Symbol(参数是字符串);`： 表示对 Symbol 实例的描述
     - `Symbol(参数是对象);`： 就会调用该对象的toString方法，然后才生成一个 Symbol 值
@@ -150,4 +150,47 @@ myIterable[Symbol.iterator] = function* () {
 };
 
 [...myIterable] // [1, 2, 3]
+```
+# 7 Symbol应用场景
++ 总结1：可以在共享的容器中使用Symbol作为key，就可以不担心key的字符串重复而导致覆盖
+
+```js
+// 示例1：解决字符串耦合问题
+let user1 = {
+  name: '李四'
+}
+let user2 = {
+  name: '李四'
+}
+let grade = {
+  [user1.name]: {
+    js: 98
+  },
+  [user2.name]: {
+    js: 100
+  }
+}
+
+console.log(grade)  // 只会打出来user2的李四，因为都是字符串李四所以覆盖了
+
+// 解决办法
+let user1 = {
+  name: '李四',
+  key: Symbol()
+
+}
+let user2 = {
+  name: '李四',
+  key: Symbol()
+}
+let grade = {
+  [user1.key]: {
+    js: 98
+  },
+  [user2.key]: {
+    js: 100
+  }
+}
+
+console.log(grade)  // 此时打印出两个
 ```

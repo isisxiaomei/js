@@ -558,11 +558,11 @@ Promise.all([p1, p2])
 // Error: 报错了
 ```
 # 9. Promise.allSettled()
-+ 参数：接受一组promise实例，返回一个新的promise实例；只有等到所有这些参数实例都返回结果，不管是fulfilled还是rejected，包装实例才算结束；这也是和all的区别
++ 参数：参数是一个可迭代的对象，并且可迭代对象里面的每一项都是promise实例；只有等到所有这些参数实例都返回结果，不管是fulfilled还是rejected，包装实例才算结束；这也是和all的区别
 
 
 # 10. Promise.race()
-
++  参数：参数是一个可迭代的对象，并且可迭代对象里面的每一项都是promise实例，返回一个新的promise实例；只要有一个返回，不管成功失败，就返回第一个有返回的promise
 
 # 11. Promise.try()
 

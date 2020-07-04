@@ -202,7 +202,6 @@ matches.input // "cat, bat, sat, fat"
 '_x_x'.search(/x/)  // 1
 ```
 + `replace`: 替换匹配到的值；接受两个参数，一个是正则，一个是替换的内容
-    - 加g修饰符，就替换第一个匹配成功的值，否则替换所有匹配成功的值
 ```js
 // 示例1：
 'aaa'.replace('a', 'b') // "baa"
@@ -212,6 +211,10 @@ matches.input // "cat, bat, sat, fat"
 // 示例2：消除空格
 var str = '  #id div.class  ';
 str.replace(/^\s+|\s+$/g, '')   // "#id div.class"
+
+var str = '  #id div.class  ';
+str.replace(/^\s+|\s+$/)    // "undefined#id div.class  "
+
 ```
 + replace方法的第二个参数可以使用美元符号$，用来指代所替换的内容
 ```js
