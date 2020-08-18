@@ -1,12 +1,12 @@
 <!-- TOC -->
 
-- [数组的扩展](#%e6%95%b0%e7%bb%84%e7%9a%84%e6%89%a9%e5%b1%95)
-- [1. 扩展运算符](#1-%e6%89%a9%e5%b1%95%e8%bf%90%e7%ae%97%e7%ac%a6)
-  - [1.1 概念](#11-%e6%a6%82%e5%bf%b5)
-- [2. 数组的静态方法](#2-%e6%95%b0%e7%bb%84%e7%9a%84%e9%9d%99%e6%80%81%e6%96%b9%e6%b3%95)
+- [数组的扩展](#数组的扩展)
+- [1. 扩展运算符](#1-扩展运算符)
+  - [1.1 概念](#11-概念)
+- [2. 数组的静态方法](#2-数组的静态方法)
   - [2.1 Array.from()](#21-arrayfrom)
   - [2.2 Array.of()](#22-arrayof)
-- [3. 数组实例方法](#3-%e6%95%b0%e7%bb%84%e5%ae%9e%e4%be%8b%e6%96%b9%e6%b3%95)
+- [3. 数组实例方法](#3-数组实例方法)
   - [3.1 copyWithin()](#31-copywithin)
   - [3.2 find() & findIndex()](#32-find--findindex)
   - [3.3 fill()](#33-fill)
@@ -15,8 +15,8 @@
   - [3.6 flat()，flatMap()](#36-flatflatmap)
     - [3.6.1 flat()](#361-flat)
     - [3.6.2 flatMap()](#362-flatmap)
-- [4. Array.prototype.sort() 的排序稳定性](#4-arrayprototypesort-%e7%9a%84%e6%8e%92%e5%ba%8f%e7%a8%b3%e5%ae%9a%e6%80%a7)
-- [5. 数组的空位](#5-%e6%95%b0%e7%bb%84%e7%9a%84%e7%a9%ba%e4%bd%8d)
+- [4. Array.prototype.sort() 的排序稳定性](#4-arrayprototypesort-的排序稳定性)
+- [5. 数组的空位](#5-数组的空位)
 
 <!-- /TOC -->
 # 数组的扩展

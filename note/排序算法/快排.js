@@ -4,7 +4,7 @@ function findMid(nums, l, r){
     let j = r;
     while (i<j){
         while(i<j){
-            if (temp <= nums[j]) {
+            if (temp <= nums[j] && i<j) {
                 --j;
             }
         }
@@ -12,7 +12,7 @@ function findMid(nums, l, r){
             nums[i] = nums[j];
         }
         while(i<j){
-            if (temp >= nums[i]) {
+            if (temp >= nums[i] && i<j) {
                 ++i;
             }
         }

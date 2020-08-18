@@ -6,32 +6,65 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>Document</title>
+  <style>
+    #box {
+      height: 100px;
+      background-color: #444;
+      color: red;
+      text-align: center;
+      font-size: 50px;
+    }
+  </style>
 </head>
 
 <body>
-  <div id="box">
-    hello
-  </div>
+  <div id="box"></div>
+  <script src="https://cdn.bootcss.com/underscore.js/1.9.1/underscore.js"></script>
   <script>
+    let count = 0;
+    let container = document.querySelector('#box');
+    function doSomething() {
+      container.innerHTML = ++count
+    }
+    container.onmousemove = myDebounce(doSomething, 300);
 
-    var reg = /a/g;
-    var str = 'abc_abc'
 
-    var r1 = reg.exec(str);
-    r1 // ["a"]
-    r1.index // 0
-    reg.lastIndex // 1
+    function myDebounce(fn, wait) {
+      var timeout = null;
+      console.log('hello');
 
-    var r2 = reg.exec(str);
-    r2 // ["a"]
-    r2.index // 4
-    reg.lastIndex // 5
+      return function () {
+        // 备注：这个函数返回到onmousemove上了，所以这个函数内部的this指向container
+        let that = this;
+        // 备注：这里的arguments是onmousemove的事件e对象
+        let args = arguments;
 
-    
+        // 备注：因为每次重新计算所以每次需要清除timeout
+        clearTimeout(timeout);
+        timeout = setTimeout(function () {
+          fn.apply(this, args);
+        }, wait)
+      }
+    }
 
-    var r4 = reg.exec(str);
-    r4 // null
-    reg.lastIndex // 0
+    // var reg = /a/g;
+    // var str = 'abc_abc'
+
+    // var r1 = reg.exec(str);
+    // r1 // ["a"]
+    // r1.index // 0
+    // reg.lastIndex // 1
+
+    // var r2 = reg.exec(str);
+    // r2 // ["a"]
+    // r2.index // 4
+    // reg.lastIndex // 5
+
+
+
+    // var r4 = reg.exec(str);
+    // r4 // null
+    // reg.lastIndex // 0
 
       // var P = function (){
 
