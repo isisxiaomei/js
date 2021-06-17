@@ -153,6 +153,29 @@ Object.getPrototypeOf(Object.prototype) // null
 + ***对象和原型***：对象中都有一个`__proto__`的属性，指向父对象；以此来实现该对象访问父对象的中的相关属性; 注意`__proto__`属性只能在控制台查看，但是没有提供代码访问；所以要获取实例对象原型可以通过`Object.getPrototypeOf(实例对象)` 获取。`Object.getPrototypeOf(person1) === Person.prototype`
 + ***函数和原型***：对于构造函数来说，生成实例的时候，`prototype`会自动成为实例对象的原型；构造函数中的`prototype`属性可以通过`Person.prototype`进行访问
 + ***函数也是对象***：函数也是对象，函数对象是Function的实例
+
+
+```js
+/*
+1. Function 是所有函数的构造函数
+2. Object, Array 是函数 + 函数是对象 ==> Object, Array 是对象，对象有原型 ( __proto__ 属性 )
+3. 对象的原型是构造函数的原型对象 ==> Function.prototype === Object.__proto__ Function.prototype === Array.__proto__
+4. Function 也是个函数… ==> Function.prototype === Function.__proto__
+5. 最后补充一点： typeof Function.prototype ==> function
+*/
+String.prototype.__proto__=== Object.prototype//true
+Number.prototype.__proto__=== Object.prototype//true
+Boolean.prototype.__proto__=== Object.prototype//true
+
+Function.prototype === Object.__proto__
+Function.prototype === Array.__proto__
+Function.prototype === Function.__proto__
+
+//同理
+Function.prototype.__proto__=== Object.prototype//true
+```
+
+
 ```js
 // 示例1：
 function fun(){}
