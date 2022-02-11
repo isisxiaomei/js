@@ -337,3 +337,10 @@ let b = a ?? 'hh'
 console.log(b) // hh
 
 ```
+# 环境区分globalThis（es11）
+
+```js
+// 浏览器下是window  node下是global
+console.log(globalThis)
+```
+
