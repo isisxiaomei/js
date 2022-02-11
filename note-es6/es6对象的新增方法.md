@@ -304,3 +304,36 @@ ar obj = new Object();
 obj.__proto__ === Object.prototype  // true
 obj.__proto__ === obj.constructor.prototype // true
 ```
+
+
+
+
++ __proto__属性只有浏览器才需要部署，其他环境可以不部署
+
+
+---
+
+
+# 控制合并运算符 ??(es11)
+
+- m ?? n : 只有当m是undefined或者null时才会执行n，否则直接返回m
+- m || n : 短路的弊端是当m是0或者空串时也会执行n，但此时想获取的就是0或者空串
+- m?.n : 只有当m不是undefined时，才会向后执行，否则返回undefined
+
+```js
+//示例1
+
+let a = null
+
+let b = a ?? 'hh'
+
+console.log(b) // hh
+
+// 示例2
+let a = undefined
+
+let b = a ?? 'hh'
+
+console.log(b) // hh
+
+```
