@@ -76,7 +76,7 @@ Object.create(123)
     - 如果参数不是对象，Object.values会先将其转为对象。
         - 【字符串会先转成一个类似数组的对象】
         - 由于数值和布尔值的包装对象，都不会为实例添加非继承的属性。所以，Object.values会返回空数组
-+ `Object.entries()`: 返回一个数组，成员是参数对象自身的（不含继承的）所有可遍历（enumerable）属性的键值对数组
++ `Object.entries()`: 返回一个entry键值对数组，成员是参数对象自身的（不含继承的）所有可遍历（enumerable）属性的键值对数组
     - 用途：可以将对象转为map结构
 
 ```js
@@ -117,8 +117,23 @@ const map = new Map(Object.entries(obj));
 map // Map { foo: "bar", baz: 42 }
 ```
 
+
+```js
+// for-in 和 for-of的区别：in获取的是元素的下标， of获取的是元素
+
+let aa = [11,22]
+
+for(let i in aa){
+    console.log(i) // 0, 1
+}
+
+for(let i of aa){
+    console.log(i) // 11, 12
+}
+```
+
 ## 2.3 Object.fromEntries()
-+ `Object.fromEntries()`: 是Object.entries()的逆操作，用于将一个键值对数组转为对象
++ `Object.fromEntries()`: 是Object.entries()的逆操作，用于将一个entry键值对数组转为对象
 
 ```js
 // 示例1：
