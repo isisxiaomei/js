@@ -137,7 +137,7 @@ console.log("后续代码~");
 
 # 2. await
 
-## await表达式返回promise
+## 2.1 await表达式返回promise
 一般`await + 表达式(表达式返回一个promise)`
 
 value获取await返回值的时机：当await表达式的promise执行resolve后，会将resolved的值作为await的返回值给value；相当于value获取值以及await模块内后续代码都是promise的then
@@ -164,4 +164,84 @@ console.log(111);
 // 输出：111 hello 222
 ```
 
-## await返回普通值
+## 2.2 await返回普通值
+
+await + 普通值：直接返回普通值
+
+```js
+// 示例1
+async function fun(){
+    let res = await 123
+    console.log(res)  // 123
+}
+fun()
+
+// 示例1
+async function fun(){
+    let res = await {
+        a: 123
+    }
+    console.log(1111, res) // {a: 123}
+}
+fun()
+```
+
+## 2.3 await返回thenable
+
+返回then的方法中的resolve出的值作为await的返回值
+
+```js
+async function fun(){
+    let res = await {
+        then: function(resolve, reject){
+            resolve('abc')
+        }
+    }
+    console.log(1111, res) // abc
+}
+fun()
+```
+
+
+await对直接返回promise和返回thenable的处理逻辑是一样的
+
+```js
+async function fun(){
+    let res = await new Promise((resolve) => {
+        resolve('abc')
+    })
+    console.log(1111, res) // abc
+}
+fun()
+```
+
+## 2.4 await返回promise的reject
+
+await如果返回reject，那么异步函数中await之后的代码不执行，会直接将reject的值作为异步函数fun的promise的reject返回值
+
+```js
+async function fun(){
+    try {
+        let res = await new Promise((resolve, reject) => {
+            reject('abc')
+        })
+        console.log(1111, res) // 不执行
+    } catch (error) {
+        console.log(222, error) // abc
+        
+    }
+}
+fun()
+
+// 或者在外层捕获 1111打印不执行，reject('abc')会将abc会作为异步函数fun的promise的reject的值
+
+async function fun(){
+    let res = await new Promise((resolve, reject) => {
+        reject('abc')
+    })
+    console.log(1111, res) // 不执行
+}
+fun().catch(err => {
+    console.log(222, err) // abc
+})
+```
